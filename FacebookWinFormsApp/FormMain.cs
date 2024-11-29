@@ -20,6 +20,7 @@ namespace BasicFacebookFeatures
         }
 
         FacebookWrapper.LoginResult m_LoginResult;
+        User m_LoggedInUser;
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -33,7 +34,7 @@ namespace BasicFacebookFeatures
 
         private void login()
         {
-            m_LoginResult = FacebookService.Login(//"3934700983518444",
+            m_LoginResult = FacebookService.Login("3934700983518444",
                 /// (This is Desig Patter's App ID. replace it with your own)
                 textBoxAppID.Text,
                 /// requested permissions:
@@ -42,6 +43,12 @@ namespace BasicFacebookFeatures
                 /// add any relevant permissions
                 );
 
+            if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
+            {
+                m_LoggedInUser = m_LoginResult.LoggedInUser;
+
+                fetchUserInfo();
+            }
             if (string.IsNullOrEmpty(m_LoginResult.ErrorMessage))
             {
                 buttonLogin.Text = $"Logged in as {m_LoginResult.LoggedInUser.Name}";
@@ -50,6 +57,15 @@ namespace BasicFacebookFeatures
                 buttonLogin.Enabled = false;
                 buttonLogout.Enabled = true;
             }
+        }
+        private void fetchUserInfo()
+        {
+            pictureBoxProfile.LoadAsync(m_LoggedInUser.PictureNormalURL);
+            this.Text = $"Logged in as {m_LoggedInUser.Name}";
+            //if (m_LoggedInUser.Posts.Count > 0)
+            //{
+            //    textBoxStatus.Text = m_LoggedInUser.Posts[0].Message;
+            //}
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)

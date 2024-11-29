@@ -34,9 +34,7 @@ namespace BasicFacebookFeatures
 
         private void login()
         {
-            m_LoginResult = FacebookService.Login("3934700983518444",
-                /// (This is Desig Patter's App ID. replace it with your own)
-                textBoxAppID.Text,
+            m_LoginResult = FacebookService.Login("3934700983518444",        
                 /// requested permissions:
                 "email",
                 "public_profile"
@@ -71,9 +69,10 @@ namespace BasicFacebookFeatures
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.LogoutWithUI();
-            buttonLogin.Text = "Logout";
+            buttonLogin.Text = "Login";
             buttonLogin.BackColor = buttonLogout.BackColor;
             m_LoginResult = null;
+            pictureBoxProfile.ImageLocation = null;
             buttonLogin.Enabled = true;
             buttonLogout.Enabled = false;
         }

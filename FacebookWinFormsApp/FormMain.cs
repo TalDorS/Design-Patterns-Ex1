@@ -77,5 +77,10 @@ namespace BasicFacebookFeatures
             buttonLogin.Enabled = true;
             buttonLogout.Enabled = false;
         }
+
+        private void pictureBoxProfile_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

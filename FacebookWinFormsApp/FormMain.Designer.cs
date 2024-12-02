@@ -1,4 +1,6 @@
-﻿namespace BasicFacebookFeatures
+﻿using System.Windows.Forms;
+
+namespace BasicFacebookFeatures
 {
     partial class FormMain
     {
@@ -33,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonGenerateFact = new System.Windows.Forms.Button();
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.textBoxAppID = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -74,6 +77,7 @@
             this.label1.TabIndex = 53;
             this.label1.Text = "This is the AppID of \"Design Patterns App 2.4\". The grader will use it to test yo" +
     "ur app.\r\nType here your own AppID to test it:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tabControl1
             // 
@@ -88,6 +92,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonGenerateFact);
             this.tabPage1.Controls.Add(this.pictureBoxProfile);
             this.tabPage1.Controls.Add(this.textBoxAppID);
             this.tabPage1.Controls.Add(this.label1);
@@ -100,6 +105,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // buttonGenerateFact
+            // 
+            this.buttonGenerateFact.Location = new System.Drawing.Point(981, 162);
+            this.buttonGenerateFact.Name = "buttonGenerateFact";
+            this.buttonGenerateFact.Size = new System.Drawing.Size(234, 43);
+            this.buttonGenerateFact.TabIndex = 56;
+            this.buttonGenerateFact.Text = "Generate Random Fact";
+            this.buttonGenerateFact.UseVisualStyleBackColor = true;
+            this.buttonGenerateFact.Click += new System.EventHandler(this.buttonGenerateFact_Click);
             // 
             // pictureBoxProfile
             // 
@@ -140,6 +155,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.FormClosing += new FormClosingEventHandler(this.FormMain_FormClosing);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -158,6 +174,7 @@
 		private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox textBoxAppID;
         private System.Windows.Forms.PictureBox pictureBoxProfile;
+        private System.Windows.Forms.Button buttonGenerateFact;
     }
 }
 

@@ -28,8 +28,8 @@ namespace BasicFacebookFeatures
 
         private List<FactType> m_Facts;
         private int m_FactIndex = 0;
-        FacebookWrapper.LoginResult m_LoginResult;
-        User m_LoggedInUser;
+        private FacebookWrapper.LoginResult m_LoginResult;
+        private User m_LoggedInUser;
         public string AccessToken { get; set; }
 
         public FormMain()
@@ -182,7 +182,6 @@ namespace BasicFacebookFeatures
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
             FacebookWrapper.FacebookService.Logout();
 
             m_LoginResult = null;

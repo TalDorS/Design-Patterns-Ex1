@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Logic\AppSettings.cs" />
     <Compile Include="Logic\LoginManager.cs" />
+    <Compile Include="Logic\RandomFactGenerator.cs" />
     <Compile Include="UserInterface\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>

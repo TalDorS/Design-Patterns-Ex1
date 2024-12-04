@@ -1,9 +1,7 @@
 ﻿using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BasicFacebookFeatures.Logic
 {
@@ -39,7 +37,18 @@ namespace BasicFacebookFeatures.Logic
             };
             m_FactIndex = 0;
         }
-
+        public void executeGenerator()
+        {
+            if (r_LoggedInUser != null)
+            {
+                string randomFact = GenerateNextFact();
+                MessageBox.Show(randomFact, "Your Random Fact!");
+            }
+            else
+            {
+                MessageBox.Show("Please log in first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         public string GenerateNextFact()
         {
             if (r_LoggedInUser == null)

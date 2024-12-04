@@ -17,7 +17,7 @@ namespace BasicFacebookFeatures
 {
     public partial class FormMain : Form
     {
-        private readonly RandomFactGenerator r_FactGenerator;
+        private FactsGeneratorForm m_FactGenerator;
         private readonly User r_LoggedInUser = null;
         private FormYearSummarization m_formYearSummarization;
 
@@ -29,10 +29,8 @@ namespace BasicFacebookFeatures
             LogoutButtonClicked = false;
             FacebookWrapper.FacebookService.s_CollectionLimit = 25;
             r_LoggedInUser = i_LoggedInUser;
-            r_FactGenerator = new RandomFactGenerator(i_LoggedInUser);
             pictureBoxProfile.LoadAsync(r_LoggedInUser.PictureNormalURL);
             this.labelUsername.Text = $"Logged in as {r_LoggedInUser.Name}";
-
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -44,20 +42,12 @@ namespace BasicFacebookFeatures
 
         private void buttonGenerateFact_Click(object sender, EventArgs e)
         {
-            executeGenerator();
-        }
+            if(m_FactGenerator == null)
+            {
+                m_FactGenerator = new FactsGeneratorForm(r_LoggedInUser);
+            }
 
-       private void executeGenerator()
-        {
-            if (r_LoggedInUser != null)
-            {
-                string randomFact = r_FactGenerator.GenerateNextFact();
-                MessageBox.Show(randomFact, "Your Random Fact!");
-            }
-            else
-            {
-                MessageBox.Show("Please log in first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            m_FactGenerator.ShowDialog();
         }
 
         private void buttonYearSummary_Click(object sender, EventArgs e)

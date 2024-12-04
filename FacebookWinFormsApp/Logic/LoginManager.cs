@@ -1,13 +1,9 @@
 ﻿using FacebookWrapper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BasicFacebookFeatures.Logic
 {
-    public class LoginManager //todo- need to handle saved user
+    public class LoginManager 
     {
         public LoginResult LoginResult { get; private set; }
         public bool IsAccessTokenValid { get; set; }

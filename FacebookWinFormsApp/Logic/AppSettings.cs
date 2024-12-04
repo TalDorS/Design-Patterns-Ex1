@@ -1,12 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace BasicFacebookFeatures.Logic
 {
     public class AppSettings
     {
+        public bool RememberUser { get; set; }
+
+        public string LastAccessToken { get; set; }
+
+        private AppSettings()
+        {
+            RememberUser = false;
+            LastAccessToken = null;
+        }
+
+        public void SaveToFile()
+        {
+            string appSettingsPath = @".\AppSettings.xml";
+
+            using (Stream stream = new FileStream(appSettingsPath, FileMode.Create))
+            {
+                XmlSerializer xmlSerialize = new XmlSerializer(this.GetType());
+                xmlSerialize.Serialize(stream, this);
+            }
+        }
+
+        public static AppSettings LoadFromFile()
+        {
+            AppSettings appSettings = null;
+
+            try
+            {
+                string appSettingsPath = @".\AppSettings.xml";
+
+                using (Stream stream = new FileStream(appSettingsPath, FileMode.Open))
+                {
+                    XmlSerializer xmlSerialize = new XmlSerializer(typeof(AppSettings));
+                    appSettings = xmlSerialize.Deserialize(stream) as AppSettings;
+                }
+            }
+            catch
+            {
+                appSettings = new AppSettings();
+            }
+
+            return appSettings;
+        }
     }
 }

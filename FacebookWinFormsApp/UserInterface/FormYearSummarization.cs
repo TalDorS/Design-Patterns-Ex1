@@ -16,10 +16,7 @@ namespace BasicFacebookFeatures.UserInterface
     {
         private readonly User r_LoggedInUser;
         private YearSummarizer m_YearSummarizer;
-        private List<Photo> m_PhotoList;
-        private int m_CurrentProfilePhotoIndex = 0;
 
-        public int CurrentYear { get; private set; }
 
         public FormYearSummarization(User i_LoggedInUser)
         {
@@ -34,11 +31,11 @@ namespace BasicFacebookFeatures.UserInterface
 
         private void buttonSummarizer_Click(object sender, EventArgs e)
         {
-            CurrentYear = this.dateTimePicker1.Value.Year;
-            m_PhotoList = m_YearSummarizer.GetProfilePhotosByYear(CurrentYear);
+            m_YearSummarizer.CurrentYear = this.dateTimePicker1.Value.Year;
             turnControlsVisible();
             populateLabelsText();
             populatePictureBoxes();
+            populatePostRichBox();
         }
 
         private void turnControlsVisible()
@@ -51,14 +48,28 @@ namespace BasicFacebookFeatures.UserInterface
 
         private void populateLabelsText()
         {
-            this.labelPhotos.Text = $"{CurrentYear}'s Photos, from oldest to newest:";
+            this.labelPhotos.Text = $"{m_YearSummarizer.CurrentYear}'s Photos, from oldest to newest:";
+            this.labelPosts.Text = $"{m_YearSummarizer.CurrentYear}'s Posts, from oldest to newest:";
         }
 
+        //TODO: ADD MORE PICTUREBOXES TO POPULATE
         private void populatePictureBoxes()
         {
-            if (m_PhotoList != null && m_PhotoList.Count > 0)
+            Photo firstProfilePhoto = m_YearSummarizer.GetFirstProfilePhoto();
+
+            if (firstProfilePhoto != null)
             {
-                setPhotoToPictureBox(pictureBoxProfilePhotos, m_PhotoList[0]);
+                setPhotoToPictureBox(pictureBoxProfilePhotos, firstProfilePhoto);
+            }
+        }
+
+        private void populatePostRichBox()
+        {
+            Post firstPost = m_YearSummarizer.GetFirstPost();
+
+            if(firstPost != null)
+            {
+                this.richTextBoxPosts.Text = $"{firstPost.Description}";
             }
         }
 
@@ -70,20 +81,40 @@ namespace BasicFacebookFeatures.UserInterface
 
         private void buttonMoveToLeftProfilePhoto_Click(object sender, EventArgs e)
         {
-            if (m_PhotoList != null && m_PhotoList.Count > 0 && m_CurrentProfilePhotoIndex != 0)
-            {
-                m_CurrentProfilePhotoIndex--;
-                setPhotoToPictureBox(pictureBoxProfilePhotos, m_PhotoList[m_CurrentProfilePhotoIndex]);
-            }
+            Photo previousProfilePhoto = m_YearSummarizer.GetPreviousProfilePhoto();
+
+            setPhotoToPictureBox(pictureBoxProfilePhotos, previousProfilePhoto);
         }
 
         private void buttonMoveToRightProfilePhoto_Click(object sender, EventArgs e)
         {
-            if (m_PhotoList != null && m_PhotoList.Count > 0 && (m_CurrentProfilePhotoIndex + 1) != m_PhotoList.Count)
-            {
-                m_CurrentProfilePhotoIndex++;
-                setPhotoToPictureBox(pictureBoxProfilePhotos, m_PhotoList[m_CurrentProfilePhotoIndex]);
-            }
+            Photo nextProfilePhoto = m_YearSummarizer.GetNextProfilePhoto();
+
+
+
+            setPhotoToPictureBox(pictureBoxProfilePhotos, nextProfilePhoto);
+        }
+
+        private void buttonMoveToLeftPost_Click(object sender, EventArgs e)
+        {
+            //if (m_PostListByYear != null && m_PostListByYear.Count > 0 && m_CurrentPostIndex != 0)
+            //{
+            //    m_CurrentProfilePhotoIndex--;
+            //    Post currentPost = m_PostListByYear[m_CurrentPostIndex];
+            //    this.labelPosts.Text = $"{currentPost.ToString()}"
+            //                           + $"Post Made In {currentPost.CreatedTime.ToString()}";
+            //}
+        }
+
+        private void buttonMoveToRightPost_Click(object sender, EventArgs e)
+        {
+            //if (m_PostListByYear != null && m_PostListByYear.Count > 0 && (m_CurrentPostIndex + 1) != m_PostListByYear.Count)
+            //{
+            //    m_CurrentProfilePhotoIndex++;
+            //    Post currentPost = m_PostListByYear[m_CurrentPostIndex];
+            //    this.labelPosts.Text = $"{currentPost.ToString()}"
+            //                           + $"Post Made In {currentPost.CreatedTime.ToString()}";
+            //}
         }
     }
 }

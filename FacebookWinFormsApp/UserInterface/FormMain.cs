@@ -11,14 +11,16 @@ using FacebookWrapper;
 using System.Windows.Forms.VisualStyles;
 using System.Net.NetworkInformation;
 using BasicFacebookFeatures.Logic;
+using BasicFacebookFeatures.UserInterface;
 
 namespace BasicFacebookFeatures
 {
     public partial class FormMain : Form
     {
         private readonly RandomFactGenerator r_FactGenerator;
-
         private readonly User r_LoggedInUser = null;
+        private FormYearSummarization m_formYearSummarization;
+
         public bool LogoutButtonClicked { get; private set; }
 
         public FormMain(User i_LoggedInUser)
@@ -56,6 +58,16 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show("Please log in first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void buttonYearSummary_Click(object sender, EventArgs e)
+        {
+            if(m_formYearSummarization == null)
+            {
+                m_formYearSummarization = new FormYearSummarization(r_LoggedInUser);
+            }
+
+            m_formYearSummarization.ShowDialog();
         }
     }
 }

@@ -35,7 +35,7 @@
             // lblFact
             // 
             this.lblFact.AutoSize = true;
-            this.lblFact.Location = new System.Drawing.Point(117, 80);
+            this.lblFact.Location = new System.Drawing.Point(108, 73);
             this.lblFact.Name = "lblFact";
             this.lblFact.Size = new System.Drawing.Size(28, 16);
             this.lblFact.TabIndex = 0;
@@ -43,7 +43,11 @@
             // 
             // buttonNextFact
             // 
-            this.buttonNextFact.Location = new System.Drawing.Point(631, 397);
+            this.buttonNextFact.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNextFact.AutoSize = true;
+            this.buttonNextFact.Location = new System.Drawing.Point(309, 311);
             this.buttonNextFact.Name = "buttonNextFact";
             this.buttonNextFact.Size = new System.Drawing.Size(164, 48);
             this.buttonNextFact.TabIndex = 1;
@@ -55,7 +59,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(485, 362);
             this.Controls.Add(this.buttonNextFact);
             this.Controls.Add(this.lblFact);
             this.Name = "FactsGeneratorForm";

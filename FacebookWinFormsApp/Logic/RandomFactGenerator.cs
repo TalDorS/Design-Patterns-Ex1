@@ -37,18 +37,22 @@ namespace BasicFacebookFeatures.Logic
             };
             m_FactIndex = 0;
         }
-        public void executeGenerator()
+        public string executeGenerator()
         {
+            string randomFact = string.Empty;
+
             if (r_LoggedInUser != null)
             {
-                string randomFact = GenerateNextFact();
-                MessageBox.Show(randomFact, "Your Random Fact!");
+                randomFact = GenerateNextFact();
             }
             else
             {
                 MessageBox.Show("Please log in first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            return randomFact;
         }
+
         public string GenerateNextFact()
         {
             if (r_LoggedInUser == null)

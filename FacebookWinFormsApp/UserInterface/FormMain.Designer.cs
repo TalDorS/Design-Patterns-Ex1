@@ -32,13 +32,13 @@ namespace BasicFacebookFeatures
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.labelUsername = new System.Windows.Forms.Label();
             this.buttonLogout = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonYearSummary = new System.Windows.Forms.Button();
             this.buttonGenerateFact = new System.Windows.Forms.Button();
             this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.textBoxAppID = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.labelUsername = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
@@ -59,17 +59,26 @@ namespace BasicFacebookFeatures
             // 
             this.tabPage1.Controls.Add(this.labelUsername);
             this.tabPage1.Controls.Add(this.buttonLogout);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.buttonYearSummary);
             this.tabPage1.Controls.Add(this.buttonGenerateFact);
             this.tabPage1.Controls.Add(this.pictureBoxProfile);
             this.tabPage1.Controls.Add(this.textBoxAppID);
-            this.tabPage1.Location = new System.Drawing.Point(4, 31);
+            this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1235, 662);
+            this.tabPage1.Size = new System.Drawing.Size(1235, 666);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // labelUsername
+            // 
+            this.labelUsername.AutoSize = true;
+            this.labelUsername.Location = new System.Drawing.Point(23, 30);
+            this.labelUsername.Name = "labelUsername";
+            this.labelUsername.Size = new System.Drawing.Size(37, 18);
+            this.labelUsername.TabIndex = 59;
+            this.labelUsername.Text = "user";
             // 
             // buttonLogout
             // 
@@ -82,14 +91,15 @@ namespace BasicFacebookFeatures
             this.buttonLogout.UseVisualStyleBackColor = false;
             this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
             // 
-            // button1
+            // buttonYearSummary
             // 
-            this.button1.Location = new System.Drawing.Point(411, 363);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(408, 121);
-            this.button1.TabIndex = 57;
-            this.button1.Text = "Tal\'s feature";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonYearSummary.Location = new System.Drawing.Point(411, 363);
+            this.buttonYearSummary.Name = "buttonYearSummary";
+            this.buttonYearSummary.Size = new System.Drawing.Size(408, 121);
+            this.buttonYearSummary.TabIndex = 57;
+            this.buttonYearSummary.Text = "Tal\'s feature";
+            this.buttonYearSummary.UseVisualStyleBackColor = true;
+            this.buttonYearSummary.Click += new System.EventHandler(this.buttonYearSummary_Click);
             // 
             // buttonGenerateFact
             // 
@@ -114,32 +124,23 @@ namespace BasicFacebookFeatures
             // 
             this.textBoxAppID.Location = new System.Drawing.Point(317, 61);
             this.textBoxAppID.Name = "textBoxAppID";
-            this.textBoxAppID.Size = new System.Drawing.Size(237, 28);
+            this.textBoxAppID.Size = new System.Drawing.Size(237, 24);
             this.textBoxAppID.TabIndex = 54;
             this.textBoxAppID.Text = "1450160541956417";
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 31);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1235, 662);
+            this.tabPage2.Size = new System.Drawing.Size(1235, 666);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // labelUsername
-            // 
-            this.labelUsername.AutoSize = true;
-            this.labelUsername.Location = new System.Drawing.Point(23, 30);
-            this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(47, 24);
-            this.labelUsername.TabIndex = 59;
-            this.labelUsername.Text = "user";
-            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1243, 697);
             this.Controls.Add(this.tabControl1);
@@ -163,7 +164,7 @@ namespace BasicFacebookFeatures
         private System.Windows.Forms.TextBox textBoxAppID;
         private System.Windows.Forms.Button buttonGenerateFact;
         private PictureBox pictureBoxProfile;
-        private Button button1;
+        private Button buttonYearSummary;
         private Button buttonLogout;
         private Label labelUsername;
     }

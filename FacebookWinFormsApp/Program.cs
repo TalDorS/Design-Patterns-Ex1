@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using BasicFacebookFeatures.UI;
+using BasicFacebookFeatures.UserInterface;
 using FacebookWrapper;
 
 namespace BasicFacebookFeatures

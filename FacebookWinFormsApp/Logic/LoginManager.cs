@@ -10,6 +10,7 @@ namespace BasicFacebookFeatures.Logic
     public class LoginManager //todo- need to handle saved user
     {
         public LoginResult LoginResult { get; private set; }
+        public bool IsAccessTokenValid { get; set; }
 
         public AppSettings AppSettings { get; set; }
 
@@ -17,13 +18,33 @@ namespace BasicFacebookFeatures.Logic
         {
             LoginResult = null;
             AppSettings = null;
+            IsAccessTokenValid = false;
         }
 
         public bool LoginToFacebook()
         {
-            return login();
+            FacebookService.Logout();
+            return IsAccessTokenValid ? loginWithExistingToken() : loginWithNewToken();
         }
-        public bool login()
+
+        private bool loginWithExistingToken()
+        {
+            if (IsAccessTokenValid)
+            {
+                LoginResult = FacebookService.Connect(LoginResult.AccessToken);
+                if (string.IsNullOrEmpty(LoginResult.AccessToken))
+                {
+                    return loginWithNewToken();
+                }
+                return true; 
+            }
+            else
+            {
+                return loginWithNewToken();
+            }
+        }
+
+        public bool loginWithNewToken()
         {
             LoginResult = FacebookService.Login(
                 "3934700983518444",  // app's ID
@@ -41,5 +62,31 @@ namespace BasicFacebookFeatures.Logic
             return !string.IsNullOrEmpty(LoginResult.AccessToken);
         }
 
+        public void SaveAppSettings(bool i_IsRememberMeChecked)
+        {
+            AppSettings.RememberUser = i_IsRememberMeChecked;
+            AppSettings.LastAccessToken = i_IsRememberMeChecked ? LoginResult.AccessToken : null;
+
+            try
+            {
+                AppSettings.SaveToFile();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public bool LoadAppSettingsIfExists()
+        {
+            AppSettings = AppSettings.LoadFromFile();
+            if (AppSettings.RememberUser && !string.IsNullOrEmpty(AppSettings.LastAccessToken))
+            {
+                LoginResult = FacebookService.Connect(AppSettings.LastAccessToken);
+                IsAccessTokenValid = !string.IsNullOrEmpty(LoginResult.AccessToken);
+            }
+
+            return IsAccessTokenValid;
+        }
     }
 }

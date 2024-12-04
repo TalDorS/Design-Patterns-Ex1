@@ -1,4 +1,5 @@
 ﻿using BasicFacebookFeatures.Logic;
+using FacebookWrapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,22 +14,60 @@ namespace BasicFacebookFeatures.UI
 {
     public partial class FormLogin : Form
     {
-        public FormMain FormMain { get; private set; }
-        public LoginManager LoginManager { get; private set; }
-
         private const bool k_NewLoginToken = true;
+        private const string k_LoginAsUserPlaceholder = "Continue as {0}";
+
         public bool RememberUser { get; private set; }
 
+        public FormMain FormMain { get; private set; }
+
+        public LoginManager LoginManager { get; private set; }
+        public AppSettings AppSettings { get; set; }
+
+        private bool ExitMainWithLogout { get; set; }
 
         public FormLogin()
         {
             InitializeComponent();
             LoginManager = new LoginManager();
             RememberUser = false;
+            ExitMainWithLogout = true;
+            updateLoginButtonState();
         }
 
-        private void buttonLoginAsDifferentUser_Click(object sender, EventArgs e)
+        protected override void OnShown(EventArgs e)
         {
+            base.OnShown(e);
+            checkBoxRememberMe.Checked = LoginManager.LoadAppSettingsIfExists();
+            RememberUser = checkBoxRememberMe.Checked;
+            if (RememberUser)
+            {
+                updateUIWithExistingUser();
+            }
+            updateLoginButtonState();
+
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            try
+            {
+                LoginManager.SaveAppSettings(checkBoxRememberMe.Checked);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void buttonLoginAsNewUser_Click(object sender, EventArgs e)
+        {
+            FacebookService.Logout();
+            buttonLoginAsNewUser.Enabled = false;
+            LoginManager.IsAccessTokenValid = !k_NewLoginToken;
+            executeLogin();
+            buttonLoginAsNewUser.Enabled = true;
 
         }
 
@@ -40,7 +79,44 @@ namespace BasicFacebookFeatures.UI
             this.Visible = true;
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
+        private void FormLogin_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                doWhenFormIsVisible();
+                updateLoginButtonState();
+            }
+            else
+            {
+                RememberUser = checkBoxRememberMe.Checked;
+            }
+        }
+
+        private void doWhenFormIsVisible()
+        {
+            if (RememberUser || !ExitMainWithLogout)
+            {
+                updateUIWithExistingUser();
+            }
+            else
+            {
+                initializeUIToInitialState();
+            }
+        }
+
+        private void initializeUIToInitialState()
+        {
+            checkBoxRememberMe.Checked = false;
+            changingButtonVisibility(k_NewLoginToken);
+        }
+        private void changingButtonVisibility(bool i_NewLoginToken)
+        {
+            LoginManager.IsAccessTokenValid = !i_NewLoginToken;
+            buttonLoginAs.Visible = i_NewLoginToken;
+            buttonLoginAsNewUser.Visible = !i_NewLoginToken;
+        }
+
+        private void buttonLoginAs_Click(object sender, EventArgs e)
         {
             executeLogin();
         }
@@ -51,12 +127,54 @@ namespace BasicFacebookFeatures.UI
 
             if (isSuccessfulLogin)
             {
-                FormMain = new FormMain(LoginManager.LoginResult.LoggedInUser);
-                switchForms();
+                initiateFacebookFormAfterLogin();
             }
             else
             {
                 MessageBox.Show(LoginManager.LoginResult.ErrorMessage, "Login Failed");
+            }
+        }
+
+        private void initiateFacebookFormAfterLogin()
+        {
+            FormMain = new FormMain(LoginManager.LoginResult.LoggedInUser);
+            switchForms();
+        }
+
+        private void updateUIWithExistingUser()
+        {
+            try
+            {
+                if (LoginManager.IsAccessTokenValid && LoginManager.LoginResult.AccessToken != null)
+                {
+                    FormMain = new FormMain(LoginManager.LoginResult.LoggedInUser);
+                    buttonLoginAs.Text = string.Format(k_LoginAsUserPlaceholder, LoginManager.LoginResult.LoggedInUser.Name);
+                    buttonLoginAs.Enabled = false;
+                    buttonLoginAsNewUser.Enabled = true;
+
+                    MessageBox.Show($"Welcome back, {LoginManager.LoginResult.LoggedInUser.Name}!", "Login Successful");
+
+                    switchForms();
+                }
+                else
+                {
+                    MessageBox.Show("The saved access token is invalid. Please log in again.", "Login Required");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while updating the UI: {ex.Message}", "Error");
+            }
+        }
+        private void updateLoginButtonState()
+        {
+            if (!LoginManager.IsAccessTokenValid)
+            {
+                buttonLoginAs.Enabled = false;
+            }
+            else
+            {
+                buttonLoginAs.Enabled = true;
             }
         }
     }

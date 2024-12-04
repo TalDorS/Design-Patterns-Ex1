@@ -38,16 +38,16 @@ namespace BasicFacebookFeatures
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             LogoutButtonClicked = true;
-            FacebookService.LogoutWithUI();
+            FacebookService.Logout();
             this.Close();
         }
 
         private void buttonGenerateFact_Click(object sender, EventArgs e)
         {
-            executeGenertor();
+            executeGenerator();
         }
 
-       private void executeGenertor()
+       private void executeGenerator()
         {
             if (r_LoggedInUser != null)
             {

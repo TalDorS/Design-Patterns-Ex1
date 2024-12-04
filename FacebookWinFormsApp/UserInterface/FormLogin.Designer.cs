@@ -28,35 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonLoginAsDifferentUser = new System.Windows.Forms.Button();
+            this.buttonLoginAsNewUser = new System.Windows.Forms.Button();
             this.checkBoxRememberMe = new System.Windows.Forms.CheckBox();
             this.LoginPhoto = new System.Windows.Forms.PictureBox();
-            this.buttonLogin = new System.Windows.Forms.Button();
+            this.buttonLoginAs = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.LoginPhoto)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonLoginAsDifferentUser
+            // buttonLoginAsNewUser
             // 
-            this.buttonLoginAsDifferentUser.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.buttonLoginAsDifferentUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonLoginAsDifferentUser.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonLoginAsDifferentUser.Location = new System.Drawing.Point(72, 217);
-            this.buttonLoginAsDifferentUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.buttonLoginAsDifferentUser.Name = "buttonLoginAsDifferentUser";
-            this.buttonLoginAsDifferentUser.Size = new System.Drawing.Size(202, 52);
-            this.buttonLoginAsDifferentUser.TabIndex = 2;
-            this.buttonLoginAsDifferentUser.Text = "Login as  a different user";
-            this.buttonLoginAsDifferentUser.UseVisualStyleBackColor = false;
-            this.buttonLoginAsDifferentUser.Click += new System.EventHandler(this.buttonLoginAsDifferentUser_Click);
+            this.buttonLoginAsNewUser.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.buttonLoginAsNewUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLoginAsNewUser.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonLoginAsNewUser.Location = new System.Drawing.Point(96, 267);
+            this.buttonLoginAsNewUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonLoginAsNewUser.Name = "buttonLoginAsNewUser";
+            this.buttonLoginAsNewUser.Size = new System.Drawing.Size(269, 64);
+            this.buttonLoginAsNewUser.TabIndex = 2;
+            this.buttonLoginAsNewUser.Text = "Login as a New User";
+            this.buttonLoginAsNewUser.UseVisualStyleBackColor = false;
+            this.buttonLoginAsNewUser.Click += new System.EventHandler(this.buttonLoginAsNewUser_Click);
             // 
             // checkBoxRememberMe
             // 
             this.checkBoxRememberMe.AutoSize = true;
             this.checkBoxRememberMe.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxRememberMe.Location = new System.Drawing.Point(17, 282);
-            this.checkBoxRememberMe.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxRememberMe.Location = new System.Drawing.Point(23, 347);
+            this.checkBoxRememberMe.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxRememberMe.Name = "checkBoxRememberMe";
-            this.checkBoxRememberMe.Size = new System.Drawing.Size(130, 21);
+            this.checkBoxRememberMe.Size = new System.Drawing.Size(152, 24);
             this.checkBoxRememberMe.TabIndex = 3;
             this.checkBoxRememberMe.Text = "Remember me";
             this.checkBoxRememberMe.UseVisualStyleBackColor = true;
@@ -64,40 +64,40 @@
             // LoginPhoto
             // 
             this.LoginPhoto.Image = global::BasicFacebookFeatures.Properties.Resources.images;
-            this.LoginPhoto.Location = new System.Drawing.Point(61, 10);
-            this.LoginPhoto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LoginPhoto.Location = new System.Drawing.Point(81, 12);
+            this.LoginPhoto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LoginPhoto.Name = "LoginPhoto";
-            this.LoginPhoto.Size = new System.Drawing.Size(229, 159);
+            this.LoginPhoto.Size = new System.Drawing.Size(305, 196);
             this.LoginPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.LoginPhoto.TabIndex = 4;
             this.LoginPhoto.TabStop = false;
             // 
-            // buttonLogin
+            // buttonLoginAs
             // 
-            this.buttonLogin.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.buttonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonLogin.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonLogin.Location = new System.Drawing.Point(72, 174);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(202, 38);
-            this.buttonLogin.TabIndex = 6;
-            this.buttonLogin.Text = "Login";
-            this.buttonLogin.UseVisualStyleBackColor = false;
-            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
+            this.buttonLoginAs.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.buttonLoginAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLoginAs.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonLoginAs.Location = new System.Drawing.Point(96, 214);
+            this.buttonLoginAs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonLoginAs.Name = "buttonLoginAs";
+            this.buttonLoginAs.Size = new System.Drawing.Size(269, 47);
+            this.buttonLoginAs.TabIndex = 6;
+            this.buttonLoginAs.Text = "Login As an Existing User";
+            this.buttonLoginAs.UseVisualStyleBackColor = false;
+            this.buttonLoginAs.Click += new System.EventHandler(this.buttonLoginAs_Click);
             // 
             // FormLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(196)))), ((int)(((byte)(244)))));
-            this.ClientSize = new System.Drawing.Size(346, 314);
-            this.Controls.Add(this.buttonLogin);
+            this.ClientSize = new System.Drawing.Size(461, 386);
+            this.Controls.Add(this.buttonLoginAs);
             this.Controls.Add(this.LoginPhoto);
             this.Controls.Add(this.checkBoxRememberMe);
-            this.Controls.Add(this.buttonLoginAsDifferentUser);
+            this.Controls.Add(this.buttonLoginAsNewUser);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormLogin";
             this.Text = "FormLogin";
             ((System.ComponentModel.ISupportInitialize)(this.LoginPhoto)).EndInit();
@@ -107,9 +107,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button buttonLoginAsDifferentUser;
+        private System.Windows.Forms.Button buttonLoginAsNewUser;
         private System.Windows.Forms.CheckBox checkBoxRememberMe;
         private System.Windows.Forms.PictureBox LoginPhoto;
-        private System.Windows.Forms.Button buttonLogin;
+        private System.Windows.Forms.Button buttonLoginAs;
     }
 }

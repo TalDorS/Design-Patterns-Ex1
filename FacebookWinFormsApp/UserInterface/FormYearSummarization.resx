@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBoxFeatureDescription.Text" xml:space="preserve">
+    <value>Hello and welcome to our Summarizer™ feature!
+
+This exciting feature gathers all your cherished moments from the year and presents them in one delightful place. It fetches your profile pictures, posts, and even tracks the events you've been to this year. With just a few clicks, you can relive your best memories, explore your highlights, and play around with your personal year-in-review summary.
+
+Whether it's a recap of your milestones or a nostalgic trip through your timeline, Summarizer™ is here to make your year unforgettable. Dive in and enjoy!
+
+
+
+
+</value>
+  </data>
 </root>

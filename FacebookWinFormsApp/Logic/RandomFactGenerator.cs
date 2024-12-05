@@ -37,6 +37,19 @@ namespace BasicFacebookFeatures.Logic
             };
             m_FactIndex = 0;
         }
+        public FactType CurrentFact
+        {
+            get
+            {
+                if (m_FactIndex == 0)
+                {
+                    return m_Facts[m_Facts.Count - 1]; 
+                }
+
+                return m_Facts[m_FactIndex - 1];
+            }
+        }
+
         public string executeGenerator()
         {
             string randomFact = string.Empty;

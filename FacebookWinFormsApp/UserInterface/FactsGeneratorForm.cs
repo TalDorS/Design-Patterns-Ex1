@@ -35,6 +35,8 @@ namespace BasicFacebookFeatures.UserInterface
             buttonNextFact.Enabled = false;
             string fact = m_FactGenerator.GenerateNextFact();
             lblFact.Text = fact;
+
+            setImageForFact(m_FactGenerator.CurrentFact);
             applyRandomFontAndSize();
             applyRandomColor();
             centerLabel();
@@ -73,6 +75,40 @@ namespace BasicFacebookFeatures.UserInterface
             lblFact.AutoSize = false; // Disable AutoSize to control width and height manually
             lblFact.TextAlign = ContentAlignment.TopCenter; // Center the text
         }
+        private void setImageForFact(RandomFactGenerator.FactType factType)
+        {
+            switch (factType)
+            {
+                case RandomFactGenerator.FactType.Friends:
+                    pictureBox1.Image = Properties.Resources.FriendsImage; // Replace with the actual image
+                    break;
+                case RandomFactGenerator.FactType.Posts:
+                    pictureBox1.Image = Properties.Resources.PostsImage; // Replace with the actual image
+                    break;
+                case RandomFactGenerator.FactType.Age:
+                    pictureBox1.Image = Properties.Resources.AgeImage; // Replace with the actual image
+                    break;
+                case RandomFactGenerator.FactType.RelationshipStatus:
+                    pictureBox1.Image = Properties.Resources.RelationshipImage; // Replace with the actual image
+                    break;
+                case RandomFactGenerator.FactType.Hometown:
+                    pictureBox1.Image = Properties.Resources.HometownImage; // Replace with the actual image
+                    break;
+                case RandomFactGenerator.FactType.Gender:
+                    pictureBox1.Image = Properties.Resources.GenderImage; // Replace with the actual image
+                    break;
+                case RandomFactGenerator.FactType.Birthday:
+                    pictureBox1.Image = Properties.Resources.BirthdayImage; // Replace with the actual image
+                    break;
+                default:
+                    pictureBox1.Image = null;
+                    break;
+            }
+
+            // Optionally, adjust PictureBox settings to fit the image nicely
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
+
         private void applyRandomColor()
         {
             Color[] colors =
@@ -89,9 +125,9 @@ namespace BasicFacebookFeatures.UserInterface
         private void centerLabel()
         {
             lblFact.AutoSize = true;
-            lblFact.Left = (this.ClientSize.Width - lblFact.Width) / 2; 
-            lblFact.Top = 60; 
+            lblFact.Left = (this.ClientSize.Width - lblFact.Width) / 2;
+            int verticalOffset = 70; 
+            lblFact.Top = (this.ClientSize.Height - lblFact.Height) / 2 - verticalOffset;
         }
-
     }
 }

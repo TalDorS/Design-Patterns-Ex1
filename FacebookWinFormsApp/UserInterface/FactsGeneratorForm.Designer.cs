@@ -106,9 +106,9 @@
             // 
             // pictureBoxFacts
             // 
-            this.pictureBoxFacts.Location = new System.Drawing.Point(166, 222);
+            this.pictureBoxFacts.Location = new System.Drawing.Point(177, 222);
             this.pictureBoxFacts.Name = "pictureBoxFacts";
-            this.pictureBoxFacts.Size = new System.Drawing.Size(491, 250);
+            this.pictureBoxFacts.Size = new System.Drawing.Size(479, 250);
             this.pictureBoxFacts.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxFacts.TabIndex = 16;
             this.pictureBoxFacts.TabStop = false;

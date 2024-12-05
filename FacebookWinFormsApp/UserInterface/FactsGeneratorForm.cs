@@ -105,6 +105,12 @@ namespace BasicFacebookFeatures.UserInterface
                         pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage; 
                     }
                     break;
+                case RandomFactGenerator.FactType.LikedPages: // New Fact
+                    pictureBoxFacts.Image = Properties.Resources.LikedPagesImage; 
+                    break;
+                case RandomFactGenerator.FactType.Groups: // New Fact
+                    pictureBoxFacts.Image = Properties.Resources.GroupsImage; 
+                    break;
                 default:
                     pictureBoxFacts.Image = null;
                     break;

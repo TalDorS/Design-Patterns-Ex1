@@ -177,5 +177,11 @@
   <ItemGroup>
     <None Include="Resources\DefaultProfileImage.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LikedPagesImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GroupsImage.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

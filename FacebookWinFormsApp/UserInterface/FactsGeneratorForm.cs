@@ -1,12 +1,7 @@
 ﻿using BasicFacebookFeatures.Logic;
 using FacebookWrapper.ObjectModel;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,8 +13,6 @@ namespace BasicFacebookFeatures.UserInterface
         private readonly User r_LoggedInUser;
         private RandomFactGenerator m_FactGenerator;
         private readonly Random m_Random;
-        //private Timer m_AnimationTimer;
-        //private float m_OpacityStep;
 
         public FactsGeneratorForm(User i_LoggedInUser)
         {
@@ -35,15 +28,15 @@ namespace BasicFacebookFeatures.UserInterface
             buttonNextFact.Enabled = false;
             string fact = m_FactGenerator.GenerateNextFact();
             lblFact.Text = fact;
+
+            setImageForFact(m_FactGenerator.CurrentFact);
             applyRandomFontAndSize();
             applyRandomColor();
             centerLabel();
             this.Invalidate();
 
-            // Re-enable the button after a short delay to allow user to see the new fact
             Task.Delay(300).ContinueWith(t =>
             {
-                // Re-enable the button after a delay (in milliseconds)
                 buttonNextFact.Invoke((MethodInvoker)(() => buttonNextFact.Enabled = true));
             });
         }
@@ -61,18 +54,71 @@ namespace BasicFacebookFeatures.UserInterface
         private void applyRandomFontAndSize()
         {
             string[] fontFamilies = { "Arial", "Comic Sans MS", "Verdana", "Tahoma", "Times New Roman" };
-
-            int fontSize = m_Random.Next(15, 21); // Random font size between 15 and 20
+            int fontSize = m_Random.Next(10, 29); // Random font size between 10 and 28
             string fontFamily = fontFamilies[m_Random.Next(fontFamilies.Length)];
 
             lblFact.Font = new Font(fontFamily, fontSize, FontStyle.Bold);
-            
-            // Set label width to be within the form width, with some padding
-            lblFact.Width = this.ClientSize.Width - 40;  // Leave 20px padding on each side
-            lblFact.MaximumSize = new Size(this.ClientSize.Width - 40, this.ClientSize.Height - 100); // Max height is form height minus padding
-            lblFact.AutoSize = false; // Disable AutoSize to control width and height manually
-            lblFact.TextAlign = ContentAlignment.TopCenter; // Center the text
+            lblFact.Width = this.ClientSize.Width - 40; 
+            lblFact.MaximumSize = new Size(this.ClientSize.Width - 40, this.ClientSize.Height - 100);
+            lblFact.AutoSize = false;
+            lblFact.TextAlign = ContentAlignment.TopCenter;
         }
+        private void setImageForFact(RandomFactGenerator.FactType factType)
+        {
+            switch (factType)
+            {
+                case RandomFactGenerator.FactType.Friends:
+                    pictureBoxFacts.Image = Properties.Resources.FriendsImage; 
+                    break;
+                case RandomFactGenerator.FactType.Posts:
+                    pictureBoxFacts.Image = Properties.Resources.PostsImage; 
+                    break;
+                case RandomFactGenerator.FactType.Age:
+                    pictureBoxFacts.Image = Properties.Resources.AgeImage; 
+                    break;
+                case RandomFactGenerator.FactType.RelationshipStatus:
+                    pictureBoxFacts.Image = Properties.Resources.RelationshipImage; 
+                    break;
+                case RandomFactGenerator.FactType.Hometown:
+                    pictureBoxFacts.Image = Properties.Resources.HometownImage;
+                    break;
+                case RandomFactGenerator.FactType.Gender:
+                    pictureBoxFacts.Image = Properties.Resources.GenderImage; 
+                    break;
+                case RandomFactGenerator.FactType.Birthday:
+                    pictureBoxFacts.Image = Properties.Resources.BirthdayImage; 
+                    break;
+                case RandomFactGenerator.FactType.ProfilePicture:
+                    if (Uri.IsWellFormedUriString(r_LoggedInUser.PictureNormalURL, UriKind.Absolute))
+                    {
+                        try
+                        {
+                            pictureBoxFacts.Load(r_LoggedInUser.PictureNormalURL); 
+                        }
+                        catch (Exception)
+                        {
+                            pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage; 
+                        }
+                    }
+                    else
+                    {
+                        pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage; 
+                    }
+                    break;
+                case RandomFactGenerator.FactType.LikedPages: // New Fact
+                    pictureBoxFacts.Image = Properties.Resources.LikedPagesImage; 
+                    break;
+                case RandomFactGenerator.FactType.Groups: // New Fact
+                    pictureBoxFacts.Image = Properties.Resources.GroupsImage; 
+                    break;
+                default:
+                    pictureBoxFacts.Image = null;
+                    break;
+            }
+
+            pictureBoxFacts.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
+
         private void applyRandomColor()
         {
             Color[] colors =
@@ -88,10 +134,11 @@ namespace BasicFacebookFeatures.UserInterface
         }
         private void centerLabel()
         {
-            lblFact.AutoSize = true;
-            lblFact.Left = (this.ClientSize.Width - lblFact.Width) / 2; 
-            lblFact.Top = 60; 
-        }
+            int verticalOffset = 90;
 
+            lblFact.AutoSize = true;
+            lblFact.Left = (this.ClientSize.Width - lblFact.Width) / 2;
+            lblFact.Top = (this.ClientSize.Height - lblFact.Height) / 2 - verticalOffset;
+        }
     }
 }

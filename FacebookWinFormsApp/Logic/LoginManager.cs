@@ -52,7 +52,9 @@ namespace BasicFacebookFeatures.Logic
                 "user_location",
                 "user_hometown",
                 "user_photos",
-                "user_gender"
+                "user_gender",
+                "user_likes",
+                "user_groups"
             );
 
             return !string.IsNullOrEmpty(LoginResult.AccessToken);

@@ -15,7 +15,10 @@ namespace BasicFacebookFeatures.Logic
             RelationshipStatus,
             Hometown,
             Gender,
-            Birthday
+            Birthday,
+            ProfilePicture,
+            LikedPages, 
+            Groups
         }
 
         private readonly User r_LoggedInUser;
@@ -33,10 +36,26 @@ namespace BasicFacebookFeatures.Logic
                 FactType.RelationshipStatus,
                 FactType.Hometown,
                 FactType.Gender,
-                FactType.Birthday
+                FactType.Birthday,
+                FactType.ProfilePicture,
+                FactType.LikedPages,
+                FactType.Groups
             };
             m_FactIndex = 0;
         }
+        public FactType CurrentFact
+        {
+            get
+            {
+                if (m_FactIndex == 0)
+                {
+                    return m_Facts[m_Facts.Count - 1]; 
+                }
+
+                return m_Facts[m_FactIndex - 1];
+            }
+        }
+
         public string executeGenerator()
         {
             string randomFact = string.Empty;
@@ -96,6 +115,17 @@ namespace BasicFacebookFeatures.Logic
                 case FactType.Birthday:
                     fact = $"You were born on {r_LoggedInUser.Birthday}!";
                     break;
+                case FactType.ProfilePicture:
+                    fact = $"{r_LoggedInUser.Name}'s profile picture is:";
+                    break;
+                case FactType.LikedPages: 
+                    fact= $"You like {r_LoggedInUser.LikedPages.Count} pages.";
+                    break;
+                case FactType.Groups: 
+                    fact = $"You are a member of {r_LoggedInUser.Groups.Count} groups.";
+                    break;
+                default:
+                    return "Fact unavailable.";
             }
 
             m_FactIndex++;

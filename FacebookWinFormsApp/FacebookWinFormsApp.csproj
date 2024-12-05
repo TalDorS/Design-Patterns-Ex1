@@ -153,5 +153,26 @@
   <ItemGroup>
     <None Include="Resources\images.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FriendsImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PostsImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AgeImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RelationshipImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HometownImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GenderImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BirthdayImage.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

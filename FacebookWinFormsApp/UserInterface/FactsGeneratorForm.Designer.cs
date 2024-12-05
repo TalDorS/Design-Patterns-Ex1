@@ -31,19 +31,19 @@
             this.lblFact = new System.Windows.Forms.Label();
             this.buttonNextFact = new System.Windows.Forms.Button();
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.labelFacebook = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBoxFacebook = new System.Windows.Forms.PictureBox();
-            this.labelFacebook = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFacts = new System.Windows.Forms.PictureBox();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacebook)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacts)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFact
             // 
             this.lblFact.AutoSize = true;
-            this.lblFact.Location = new System.Drawing.Point(99, 146);
+            this.lblFact.Location = new System.Drawing.Point(100, 111);
             this.lblFact.Name = "lblFact";
             this.lblFact.Size = new System.Drawing.Size(28, 16);
             this.lblFact.TabIndex = 0;
@@ -78,6 +78,18 @@
             this.panelHeader.Size = new System.Drawing.Size(802, 90);
             this.panelHeader.TabIndex = 15;
             // 
+            // labelFacebook
+            // 
+            this.labelFacebook.AutoSize = true;
+            this.labelFacebook.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(87)))), ((int)(((byte)(157)))));
+            this.labelFacebook.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFacebook.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.labelFacebook.Location = new System.Drawing.Point(68, 11);
+            this.labelFacebook.Name = "labelFacebook";
+            this.labelFacebook.Size = new System.Drawing.Size(254, 63);
+            this.labelFacebook.TabIndex = 15;
+            this.labelFacebook.Text = "facebook";
+            // 
             // richTextBox1
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -103,33 +115,21 @@
             this.pictureBoxFacebook.TabIndex = 0;
             this.pictureBoxFacebook.TabStop = false;
             // 
-            // labelFacebook
+            // pictureBoxFacts
             // 
-            this.labelFacebook.AutoSize = true;
-            this.labelFacebook.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(87)))), ((int)(((byte)(157)))));
-            this.labelFacebook.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFacebook.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelFacebook.Location = new System.Drawing.Point(68, 11);
-            this.labelFacebook.Name = "labelFacebook";
-            this.labelFacebook.Size = new System.Drawing.Size(254, 63);
-            this.labelFacebook.TabIndex = 15;
-            this.labelFacebook.Text = "facebook";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(213, 235);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(368, 212);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxFacts.Location = new System.Drawing.Point(170, 192);
+            this.pictureBoxFacts.Name = "pictureBoxFacts";
+            this.pictureBoxFacts.Size = new System.Drawing.Size(447, 242);
+            this.pictureBoxFacts.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxFacts.TabIndex = 16;
+            this.pictureBoxFacts.TabStop = false;
             // 
             // FactsGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 525);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBoxFacts);
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.buttonNextFact);
             this.Controls.Add(this.lblFact);
@@ -138,7 +138,7 @@
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacebook)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,6 +152,6 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBoxFacebook;
         private System.Windows.Forms.Label labelFacebook;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxFacts;
     }
 }

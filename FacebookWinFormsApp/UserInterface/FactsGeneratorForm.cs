@@ -80,33 +80,33 @@ namespace BasicFacebookFeatures.UserInterface
             switch (factType)
             {
                 case RandomFactGenerator.FactType.Friends:
-                    pictureBox1.Image = Properties.Resources.FriendsImage; // Replace with the actual image
+                    pictureBoxFacts.Image = Properties.Resources.FriendsImage; // Replace with the actual image
                     break;
                 case RandomFactGenerator.FactType.Posts:
-                    pictureBox1.Image = Properties.Resources.PostsImage; // Replace with the actual image
+                    pictureBoxFacts.Image = Properties.Resources.PostsImage; // Replace with the actual image
                     break;
                 case RandomFactGenerator.FactType.Age:
-                    pictureBox1.Image = Properties.Resources.AgeImage; // Replace with the actual image
+                    pictureBoxFacts.Image = Properties.Resources.AgeImage; // Replace with the actual image
                     break;
                 case RandomFactGenerator.FactType.RelationshipStatus:
-                    pictureBox1.Image = Properties.Resources.RelationshipImage; // Replace with the actual image
+                    pictureBoxFacts.Image = Properties.Resources.RelationshipImage; // Replace with the actual image
                     break;
                 case RandomFactGenerator.FactType.Hometown:
-                    pictureBox1.Image = Properties.Resources.HometownImage; // Replace with the actual image
+                    pictureBoxFacts.Image = Properties.Resources.HometownImage; // Replace with the actual image
                     break;
                 case RandomFactGenerator.FactType.Gender:
-                    pictureBox1.Image = Properties.Resources.GenderImage; // Replace with the actual image
+                    pictureBoxFacts.Image = Properties.Resources.GenderImage; // Replace with the actual image
                     break;
                 case RandomFactGenerator.FactType.Birthday:
-                    pictureBox1.Image = Properties.Resources.BirthdayImage; // Replace with the actual image
+                    pictureBoxFacts.Image = Properties.Resources.BirthdayImage; // Replace with the actual image
                     break;
                 default:
-                    pictureBox1.Image = null;
+                    pictureBoxFacts.Image = null;
                     break;
             }
 
             // Optionally, adjust PictureBox settings to fit the image nicely
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBoxFacts.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void applyRandomColor()
@@ -126,7 +126,7 @@ namespace BasicFacebookFeatures.UserInterface
         {
             lblFact.AutoSize = true;
             lblFact.Left = (this.ClientSize.Width - lblFact.Width) / 2;
-            int verticalOffset = 70; 
+            int verticalOffset = 90; 
             lblFact.Top = (this.ClientSize.Height - lblFact.Height) / 2 - verticalOffset;
         }
     }

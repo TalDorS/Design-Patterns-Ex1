@@ -22,6 +22,7 @@ namespace BasicFacebookFeatures.UI
         public FormMain FormMain { get; private set; }
 
         public LoginManager LoginManager { get; private set; }
+
         public AppSettings AppSettings { get; set; }
 
         private bool ExitMainWithLogout { get; set; }
@@ -151,9 +152,6 @@ namespace BasicFacebookFeatures.UI
                     buttonLoginAs.Text = string.Format(k_LoginAsUserPlaceholder, LoginManager.LoginResult.LoggedInUser.Name);
                     buttonLoginAs.Enabled = false;
                     buttonLoginAsNewUser.Enabled = true;
-
-                    MessageBox.Show($"Welcome back, {LoginManager.LoginResult.LoggedInUser.Name}!", "Login Successful");
-
                     switchForms();
                 }
                 else
@@ -166,6 +164,7 @@ namespace BasicFacebookFeatures.UI
                 MessageBox.Show($"An error occurred while updating the UI: {ex.Message}", "Error");
             }
         }
+
         private void updateLoginButtonState()
         {
             if (!LoginManager.IsAccessTokenValid)
@@ -178,5 +177,4 @@ namespace BasicFacebookFeatures.UI
             }
         }
     }
-
 }

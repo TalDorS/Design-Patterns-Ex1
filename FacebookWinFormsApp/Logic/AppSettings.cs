@@ -27,6 +27,7 @@ namespace BasicFacebookFeatures.Logic
             using (Stream stream = new FileStream(appSettingsPath, FileMode.Create))
             {
                 XmlSerializer xmlSerialize = new XmlSerializer(this.GetType());
+
                 xmlSerialize.Serialize(stream, this);
             }
         }
@@ -42,6 +43,7 @@ namespace BasicFacebookFeatures.Logic
                 using (Stream stream = new FileStream(appSettingsPath, FileMode.Open))
                 {
                     XmlSerializer xmlSerialize = new XmlSerializer(typeof(AppSettings));
+
                     appSettings = xmlSerialize.Deserialize(stream) as AppSettings;
                 }
             }

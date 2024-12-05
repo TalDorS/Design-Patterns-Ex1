@@ -54,9 +54,9 @@ namespace BasicFacebookFeatures.Logic
                 "user_events",
                 "user_photos",
                 "user_gender",
-                "user_likes",
-                "user_groups"
+                "user_likes"
             );
+            // removed user_groups
 
             return !string.IsNullOrEmpty(LoginResult.AccessToken);
         }

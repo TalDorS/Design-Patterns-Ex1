@@ -32,14 +32,7 @@ namespace BasicFacebookFeatures.UserInterface
 
         private void buttonSummarizer_Click(object sender, EventArgs e)
         {
-            int selectedYear = this.dateTimePicker1.Value.Year;
-            m_YearSummarizer.PopulateLists(selectedYear);
-
-            turnControlsVisible();
-            populateLabelsText();
-            populatePictureBoxes();
-            populatePostRichBox();
-            populateEvents();
+            summarizeYear();
         }
 
         private void turnControlsVisible()
@@ -89,15 +82,15 @@ namespace BasicFacebookFeatures.UserInterface
         {
             Event firstEvent = m_YearSummarizer.GetFirstEvent();
 
-            if(firstEvent != null)
+            if (firstEvent != null)
             {
-                pictureBoxEvents.LoadAsync(firstEvent.PictureNormalURL);
-                richTextBoxEventName.Text = firstEvent.Name;
-                richTextBoxEventStartDate.Text = firstEvent.StartTime.ToString();
-                richTextBoxEventEndDate.Text = firstEvent.EndTime.ToString();
+                updateEventUI(firstEvent);
             }
             else
             {
+                richTextBoxEventName.Text = string.Empty;
+                richTextBoxEventStartDate.Text = string.Empty;
+                richTextBoxEventEndDate.Text = string.Empty;
                 clearPictureBox(pictureBoxEvents);
             }
         }
@@ -144,22 +137,60 @@ namespace BasicFacebookFeatures.UserInterface
 
         private void buttonMoveToLeftPost_Click(object sender, EventArgs e)
         {
-            Post previousPost = m_YearSummarizer.GetPreviousPost();
-
-            if (previousPost != null)
-            {
-                this.richTextBoxPosts.Text = previousPost.ToString() ?? "No description available.";
-            }
+            updatePostUI(m_YearSummarizer.GetPreviousPost());
         }
 
         private void buttonMoveToRightPost_Click(object sender, EventArgs e)
         {
-            Post nextPost = m_YearSummarizer.GetNextPost();
+            updatePostUI(m_YearSummarizer.GetNextPost());
+        }
 
-            if (nextPost != null)
+        private void buttonMoveToLeftEvent_Click(object sender, EventArgs e)
+        {
+            updateEventUI(m_YearSummarizer.GetPreviousEvent());
+        }
+
+        private void buttonMoveToRightEvent_Click(object sender, EventArgs e)
+        {
+            updateEventUI(m_YearSummarizer.GetNextEvent());
+        }
+
+        private void updateEventUI(Event i_Event)
+        {
+            if (i_Event != null)
             {
-                this.richTextBoxPosts.Text = nextPost.ToString() ?? "No description available.";
+                pictureBoxEvents.LoadAsync(i_Event.PictureNormalURL);
+                richTextBoxEventName.Text = i_Event.Name;
+                richTextBoxEventStartDate.Text = i_Event.StartTime.ToString();
+                richTextBoxEventEndDate.Text = i_Event.EndTime.ToString();
             }
+        }
+
+        private void updatePostUI(Post i_Post)
+        {
+            if (i_Post == null)
+            {
+                return;
+            }
+
+            richTextBoxPosts.Text = i_Post.ToString();
+        }
+
+        private void summarizeYear()
+        {
+            int selectedYear = this.dateTimePicker1.Value.Year;
+            m_YearSummarizer.PopulateLists(selectedYear);
+
+            updateUIForSummarizedYear();
+        }
+
+        private void updateUIForSummarizedYear()
+        {
+            turnControlsVisible();
+            populateLabelsText();
+            populatePictureBoxes();
+            populatePostRichBox();
+            populateEvents();
         }
     }
 }

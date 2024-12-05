@@ -51,6 +51,7 @@ namespace BasicFacebookFeatures.Logic
                 "user_posts",
                 "user_location",
                 "user_hometown",
+                "user_events",
                 "user_photos",
                 "user_gender",
                 "user_likes",

@@ -71,7 +71,7 @@ namespace BasicFacebookFeatures.UserInterface
             this.buttonSummarizer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(87)))), ((int)(((byte)(157)))));
             this.buttonSummarizer.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSummarizer.ForeColor = System.Drawing.Color.White;
-            this.buttonSummarizer.Location = new System.Drawing.Point(5, 425);
+            this.buttonSummarizer.Location = new System.Drawing.Point(5, 437);
             this.buttonSummarizer.Name = "buttonSummarizer";
             this.buttonSummarizer.Size = new System.Drawing.Size(221, 130);
             this.buttonSummarizer.TabIndex = 0;
@@ -83,7 +83,7 @@ namespace BasicFacebookFeatures.UserInterface
             // 
             this.dateTimePicker1.CustomFormat = "yyyy";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(5, 398);
+            this.dateTimePicker1.Location = new System.Drawing.Point(5, 410);
             this.dateTimePicker1.MaxDate = new System.DateTime(2024, 12, 31, 0, 0, 0, 0);
             this.dateTimePicker1.MinDate = new System.DateTime(2004, 1, 1, 0, 0, 0, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
@@ -93,6 +93,7 @@ namespace BasicFacebookFeatures.UserInterface
             // 
             // pictureBoxProfilePhotos
             // 
+            this.pictureBoxProfilePhotos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBoxProfilePhotos.Location = new System.Drawing.Point(395, 342);
             this.pictureBoxProfilePhotos.Name = "pictureBoxProfilePhotos";
             this.pictureBoxProfilePhotos.Size = new System.Drawing.Size(189, 106);
@@ -107,7 +108,6 @@ namespace BasicFacebookFeatures.UserInterface
             this.labelPhotos.Size = new System.Drawing.Size(45, 13);
             this.labelPhotos.TabIndex = 5;
             this.labelPhotos.Text = "Picutres";
-            this.labelPhotos.Visible = false;
             // 
             // buttonMoveToLeftProfilePhoto
             // 
@@ -117,7 +117,6 @@ namespace BasicFacebookFeatures.UserInterface
             this.buttonMoveToLeftProfilePhoto.TabIndex = 6;
             this.buttonMoveToLeftProfilePhoto.Text = "<";
             this.buttonMoveToLeftProfilePhoto.UseVisualStyleBackColor = true;
-            this.buttonMoveToLeftProfilePhoto.Visible = false;
             this.buttonMoveToLeftProfilePhoto.Click += new System.EventHandler(this.buttonMoveToLeftProfilePhoto_Click);
             // 
             // buttonMoveToRightProfilePhoto
@@ -128,13 +127,14 @@ namespace BasicFacebookFeatures.UserInterface
             this.buttonMoveToRightProfilePhoto.TabIndex = 7;
             this.buttonMoveToRightProfilePhoto.Text = ">";
             this.buttonMoveToRightProfilePhoto.UseVisualStyleBackColor = true;
-            this.buttonMoveToRightProfilePhoto.Visible = false;
             this.buttonMoveToRightProfilePhoto.Click += new System.EventHandler(this.buttonMoveToRightProfilePhoto_Click);
             // 
             // richTextBoxPosts
             // 
+            this.richTextBoxPosts.Cursor = System.Windows.Forms.Cursors.Default;
             this.richTextBoxPosts.Location = new System.Drawing.Point(395, 499);
             this.richTextBoxPosts.Name = "richTextBoxPosts";
+            this.richTextBoxPosts.ReadOnly = true;
             this.richTextBoxPosts.Size = new System.Drawing.Size(189, 106);
             this.richTextBoxPosts.TabIndex = 8;
             this.richTextBoxPosts.Text = "";
@@ -147,7 +147,6 @@ namespace BasicFacebookFeatures.UserInterface
             this.buttonMoveToLeftPost.TabIndex = 9;
             this.buttonMoveToLeftPost.Text = "<";
             this.buttonMoveToLeftPost.UseVisualStyleBackColor = true;
-            this.buttonMoveToLeftPost.Visible = false;
             this.buttonMoveToLeftPost.Click += new System.EventHandler(this.buttonMoveToLeftPost_Click);
             // 
             // buttonMoveToRightPost
@@ -158,7 +157,6 @@ namespace BasicFacebookFeatures.UserInterface
             this.buttonMoveToRightPost.TabIndex = 10;
             this.buttonMoveToRightPost.Text = ">";
             this.buttonMoveToRightPost.UseVisualStyleBackColor = true;
-            this.buttonMoveToRightPost.Visible = false;
             this.buttonMoveToRightPost.Click += new System.EventHandler(this.buttonMoveToRightPost_Click);
             // 
             // labelPosts
@@ -169,7 +167,6 @@ namespace BasicFacebookFeatures.UserInterface
             this.labelPosts.Size = new System.Drawing.Size(33, 13);
             this.labelPosts.TabIndex = 11;
             this.labelPosts.Text = "Posts";
-            this.labelPosts.Visible = false;
             // 
             // panelHeader
             // 
@@ -205,6 +202,7 @@ namespace BasicFacebookFeatures.UserInterface
             this.richTextBoxFacebookText.ForeColor = System.Drawing.Color.White;
             this.richTextBoxFacebookText.Location = new System.Drawing.Point(78, 12);
             this.richTextBoxFacebookText.Name = "richTextBoxFacebookText";
+            this.richTextBoxFacebookText.ReadOnly = true;
             this.richTextBoxFacebookText.Size = new System.Drawing.Size(229, 55);
             this.richTextBoxFacebookText.TabIndex = 13;
             this.richTextBoxFacebookText.Text = "facebook";
@@ -236,14 +234,14 @@ namespace BasicFacebookFeatures.UserInterface
             this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 136F));
             this.tableLayoutPanelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelLeft.Size = new System.Drawing.Size(231, 560);
+            this.tableLayoutPanelLeft.Size = new System.Drawing.Size(231, 572);
             this.tableLayoutPanelLeft.TabIndex = 14;
             // 
             // labelEnterYearPrompt
             // 
             this.labelEnterYearPrompt.AutoSize = true;
             this.labelEnterYearPrompt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEnterYearPrompt.Location = new System.Drawing.Point(5, 376);
+            this.labelEnterYearPrompt.Location = new System.Drawing.Point(5, 388);
             this.labelEnterYearPrompt.Name = "labelEnterYearPrompt";
             this.labelEnterYearPrompt.Size = new System.Drawing.Size(191, 13);
             this.labelEnterYearPrompt.TabIndex = 5;
@@ -252,9 +250,11 @@ namespace BasicFacebookFeatures.UserInterface
             // richTextBoxFeatureDescription
             // 
             this.richTextBoxFeatureDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxFeatureDescription.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.richTextBoxFeatureDescription.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBoxFeatureDescription.Location = new System.Drawing.Point(5, 5);
             this.richTextBoxFeatureDescription.Name = "richTextBoxFeatureDescription";
+            this.richTextBoxFeatureDescription.ReadOnly = true;
             this.richTextBoxFeatureDescription.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.richTextBoxFeatureDescription.Size = new System.Drawing.Size(221, 339);
             this.richTextBoxFeatureDescription.TabIndex = 4;
@@ -278,10 +278,10 @@ namespace BasicFacebookFeatures.UserInterface
             this.labelEvents.Size = new System.Drawing.Size(40, 13);
             this.labelEvents.TabIndex = 16;
             this.labelEvents.Text = "Events";
-            this.labelEvents.Visible = false;
             // 
             // tableLayoutPanelEvents
             // 
+            this.tableLayoutPanelEvents.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetPartial;
             this.tableLayoutPanelEvents.ColumnCount = 3;
             this.tableLayoutPanelEvents.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelEvents.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
@@ -298,30 +298,37 @@ namespace BasicFacebookFeatures.UserInterface
             // 
             // richTextBoxEventName
             // 
-            this.richTextBoxEventName.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxEventName.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.richTextBoxEventName.Location = new System.Drawing.Point(6, 6);
             this.richTextBoxEventName.Name = "richTextBoxEventName";
-            this.richTextBoxEventName.Size = new System.Drawing.Size(138, 55);
+            this.richTextBoxEventName.ReadOnly = true;
+            this.richTextBoxEventName.Size = new System.Drawing.Size(126, 55);
             this.richTextBoxEventName.TabIndex = 0;
             this.richTextBoxEventName.Text = "";
             // 
             // richTextBoxEventStartDate
             // 
-            this.richTextBoxEventStartDate.Location = new System.Drawing.Point(147, 3);
+            this.richTextBoxEventStartDate.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.richTextBoxEventStartDate.Location = new System.Drawing.Point(141, 6);
             this.richTextBoxEventStartDate.Name = "richTextBoxEventStartDate";
+            this.richTextBoxEventStartDate.ReadOnly = true;
             this.richTextBoxEventStartDate.Size = new System.Drawing.Size(135, 55);
             this.richTextBoxEventStartDate.TabIndex = 1;
             this.richTextBoxEventStartDate.Text = "";
             // 
             // richTextBoxEventEndDate
             // 
-            this.richTextBoxEventEndDate.Location = new System.Drawing.Point(288, 3);
+            this.richTextBoxEventEndDate.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.richTextBoxEventEndDate.Location = new System.Drawing.Point(285, 6);
             this.richTextBoxEventEndDate.Name = "richTextBoxEventEndDate";
+            this.richTextBoxEventEndDate.ReadOnly = true;
             this.richTextBoxEventEndDate.Size = new System.Drawing.Size(105, 55);
             this.richTextBoxEventEndDate.TabIndex = 2;
             this.richTextBoxEventEndDate.Text = "";
             // 
             // pictureBoxEvents
             // 
+            this.pictureBoxEvents.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBoxEvents.Location = new System.Drawing.Point(286, 151);
             this.pictureBoxEvents.Name = "pictureBoxEvents";
             this.pictureBoxEvents.Size = new System.Drawing.Size(393, 86);
@@ -336,7 +343,7 @@ namespace BasicFacebookFeatures.UserInterface
             this.buttonMoveToRightEvent.TabIndex = 18;
             this.buttonMoveToRightEvent.Text = ">";
             this.buttonMoveToRightEvent.UseVisualStyleBackColor = true;
-            this.buttonMoveToRightEvent.Visible = false;
+            this.buttonMoveToRightEvent.Click += new System.EventHandler(this.buttonMoveToRightEvent_Click);
             // 
             // buttonMoveToLeftEvent
             // 
@@ -346,7 +353,7 @@ namespace BasicFacebookFeatures.UserInterface
             this.buttonMoveToLeftEvent.TabIndex = 19;
             this.buttonMoveToLeftEvent.Text = "<";
             this.buttonMoveToLeftEvent.UseVisualStyleBackColor = true;
-            this.buttonMoveToLeftEvent.Visible = false;
+            this.buttonMoveToLeftEvent.Click += new System.EventHandler(this.buttonMoveToLeftEvent_Click);
             // 
             // FormYearSummarization
             // 
@@ -370,6 +377,7 @@ namespace BasicFacebookFeatures.UserInterface
             this.Controls.Add(this.buttonMoveToLeftProfilePhoto);
             this.Controls.Add(this.labelPhotos);
             this.Controls.Add(this.pictureBoxProfilePhotos);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormYearSummarization";
             this.Text = "FormYearSummarization";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfilePhotos)).EndInit();

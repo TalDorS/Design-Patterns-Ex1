@@ -81,6 +81,12 @@
     <Compile Include="Logic\LoginManager.cs" />
     <Compile Include="Logic\RandomFactGenerator.cs" />
     <Compile Include="Logic\YearSummarizer.cs" />
+    <Compile Include="UserInterface\FactsGeneratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\FactsGeneratorForm.Designer.cs">
+      <DependentUpon>FactsGeneratorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserInterface\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     <Compile Include="UserInterface\FormYearSummarization.Designer.cs">
       <DependentUpon>FormYearSummarization.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserInterface\FactsGeneratorForm.resx">
+      <DependentUpon>FactsGeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>

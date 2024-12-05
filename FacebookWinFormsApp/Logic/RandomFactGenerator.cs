@@ -15,7 +15,8 @@ namespace BasicFacebookFeatures.Logic
             RelationshipStatus,
             Hometown,
             Gender,
-            Birthday
+            Birthday,
+            ProfilePicture,
         }
 
         private readonly User r_LoggedInUser;
@@ -33,7 +34,8 @@ namespace BasicFacebookFeatures.Logic
                 FactType.RelationshipStatus,
                 FactType.Hometown,
                 FactType.Gender,
-                FactType.Birthday
+                FactType.Birthday,
+                FactType.ProfilePicture
             };
             m_FactIndex = 0;
         }
@@ -108,6 +110,9 @@ namespace BasicFacebookFeatures.Logic
                     break;
                 case FactType.Birthday:
                     fact = $"You were born on {r_LoggedInUser.Birthday}!";
+                    break;
+                case FactType.ProfilePicture:
+                    fact = $"{r_LoggedInUser.Name}'s profile picture is:";
                     break;
             }
 

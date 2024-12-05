@@ -93,6 +93,26 @@ namespace BasicFacebookFeatures.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DefaultProfileImage {
+            get {
+                object obj = ResourceManager.GetObject("DefaultProfileImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DefaultProfileImage1 {
+            get {
+                object obj = ResourceManager.GetObject("DefaultProfileImage1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Facebook_logo {
             get {
                 object obj = ResourceManager.GetObject("Facebook_logo", resourceCulture);

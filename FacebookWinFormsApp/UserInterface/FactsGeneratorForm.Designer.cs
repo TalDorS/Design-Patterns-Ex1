@@ -33,11 +33,11 @@
             this.panelHeader = new System.Windows.Forms.Panel();
             this.labelFacebook = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.pictureBoxFacebook = new System.Windows.Forms.PictureBox();
             this.pictureBoxFacts = new System.Windows.Forms.PictureBox();
+            this.pictureBoxFacebook = new System.Windows.Forms.PictureBox();
             this.panelHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacebook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacebook)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFact
@@ -56,9 +56,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonNextFact.AutoSize = true;
             this.buttonNextFact.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.buttonNextFact.Location = new System.Drawing.Point(579, 453);
+            this.buttonNextFact.Location = new System.Drawing.Point(622, 479);
             this.buttonNextFact.Name = "buttonNextFact";
-            this.buttonNextFact.Size = new System.Drawing.Size(211, 60);
+            this.buttonNextFact.Size = new System.Drawing.Size(195, 54);
             this.buttonNextFact.TabIndex = 1;
             this.buttonNextFact.Text = "Next Fact";
             this.buttonNextFact.UseVisualStyleBackColor = false;
@@ -75,7 +75,7 @@
             this.panelHeader.Location = new System.Drawing.Point(1, -8);
             this.panelHeader.Margin = new System.Windows.Forms.Padding(4);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(802, 90);
+            this.panelHeader.Size = new System.Drawing.Size(818, 90);
             this.panelHeader.TabIndex = 15;
             // 
             // labelFacebook
@@ -97,12 +97,21 @@
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(545, 66);
+            this.richTextBox1.Location = new System.Drawing.Point(561, 66);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(257, 23);
             this.richTextBox1.TabIndex = 14;
             this.richTextBox1.Text = "Made By Adva Levine and Tal Dor ©";
+            // 
+            // pictureBoxFacts
+            // 
+            this.pictureBoxFacts.Location = new System.Drawing.Point(166, 222);
+            this.pictureBoxFacts.Name = "pictureBoxFacts";
+            this.pictureBoxFacts.Size = new System.Drawing.Size(491, 250);
+            this.pictureBoxFacts.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxFacts.TabIndex = 16;
+            this.pictureBoxFacts.TabStop = false;
             // 
             // pictureBoxFacebook
             // 
@@ -115,20 +124,11 @@
             this.pictureBoxFacebook.TabIndex = 0;
             this.pictureBoxFacebook.TabStop = false;
             // 
-            // pictureBoxFacts
-            // 
-            this.pictureBoxFacts.Location = new System.Drawing.Point(170, 192);
-            this.pictureBoxFacts.Name = "pictureBoxFacts";
-            this.pictureBoxFacts.Size = new System.Drawing.Size(447, 242);
-            this.pictureBoxFacts.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxFacts.TabIndex = 16;
-            this.pictureBoxFacts.TabStop = false;
-            // 
             // FactsGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 525);
+            this.ClientSize = new System.Drawing.Size(818, 536);
             this.Controls.Add(this.pictureBoxFacts);
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.buttonNextFact);
@@ -137,8 +137,8 @@
             this.Text = "FactForm";
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacebook)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacebook)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

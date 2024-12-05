@@ -17,25 +17,29 @@ namespace BasicFacebookFeatures.UserInterface
         private readonly User r_LoggedInUser;
         private YearSummarizer m_YearSummarizer;
 
-
         public FormYearSummarization(User i_LoggedInUser)
         {
             InitializeComponent();
             r_LoggedInUser = i_LoggedInUser;
+            this.labelEnterYearPrompt.Text = $"Please choose a year between 2004-{DateTime.Now.Year}";
         }
 
         protected override void OnShown(EventArgs e)
         {
+            base.OnShown(e);
             m_YearSummarizer = new YearSummarizer(r_LoggedInUser);
         }
 
         private void buttonSummarizer_Click(object sender, EventArgs e)
         {
-            m_YearSummarizer.CurrentYear = this.dateTimePicker1.Value.Year;
+            int selectedYear = this.dateTimePicker1.Value.Year;
+            m_YearSummarizer.PopulateLists(selectedYear);
+
             turnControlsVisible();
             populateLabelsText();
             populatePictureBoxes();
             populatePostRichBox();
+            populateEvents();
         }
 
         private void turnControlsVisible()
@@ -50,9 +54,9 @@ namespace BasicFacebookFeatures.UserInterface
         {
             this.labelPhotos.Text = $"{m_YearSummarizer.CurrentYear}'s Photos, from oldest to newest:";
             this.labelPosts.Text = $"{m_YearSummarizer.CurrentYear}'s Posts, from oldest to newest:";
+            this.labelEvents.Text = $"{m_YearSummarizer.CurrentYear}'s Events, from oldest to newest:";
         }
 
-        //TODO: ADD MORE PICTUREBOXES TO POPULATE
         private void populatePictureBoxes()
         {
             Photo firstProfilePhoto = m_YearSummarizer.GetFirstProfilePhoto();
@@ -61,60 +65,101 @@ namespace BasicFacebookFeatures.UserInterface
             {
                 setPhotoToPictureBox(pictureBoxProfilePhotos, firstProfilePhoto);
             }
+            else
+            {
+                clearPictureBox(pictureBoxProfilePhotos);
+            }
         }
 
         private void populatePostRichBox()
         {
             Post firstPost = m_YearSummarizer.GetFirstPost();
 
-            if(firstPost != null)
+            if (firstPost != null)
             {
-                this.richTextBoxPosts.Text = $"{firstPost.Description}";
+                this.richTextBoxPosts.Text = firstPost.ToString();
+            }
+            else
+            {
+                this.richTextBoxPosts.Text = "No posts available for the selected year.";
+            }
+        }
+
+        private void populateEvents()
+        {
+            Event firstEvent = m_YearSummarizer.GetFirstEvent();
+
+            if(firstEvent != null)
+            {
+                pictureBoxEvents.LoadAsync(firstEvent.PictureNormalURL);
+                richTextBoxEventName.Text = firstEvent.Name;
+                richTextBoxEventStartDate.Text = firstEvent.StartTime.ToString();
+                richTextBoxEventEndDate.Text = firstEvent.EndTime.ToString();
+            }
+            else
+            {
+                clearPictureBox(pictureBoxEvents);
             }
         }
 
         private void setPhotoToPictureBox(PictureBox i_PictureBox, Photo i_Photo)
         {
             i_PictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            i_PictureBox.LoadAsync(i_Photo.PictureNormalURL);
+
+            try
+            {
+                i_PictureBox.LoadAsync(i_Photo.PictureNormalURL);
+            }
+            catch
+            {
+                clearPictureBox(i_PictureBox);
+            }
+        }
+
+        private void clearPictureBox(PictureBox i_PictureBox)
+        {
+            i_PictureBox.Image = null;
+            i_PictureBox.SizeMode = PictureBoxSizeMode.Normal;
         }
 
         private void buttonMoveToLeftProfilePhoto_Click(object sender, EventArgs e)
         {
             Photo previousProfilePhoto = m_YearSummarizer.GetPreviousProfilePhoto();
 
-            setPhotoToPictureBox(pictureBoxProfilePhotos, previousProfilePhoto);
+            if (previousProfilePhoto != null)
+            {
+                setPhotoToPictureBox(pictureBoxProfilePhotos, previousProfilePhoto);
+            }
         }
 
         private void buttonMoveToRightProfilePhoto_Click(object sender, EventArgs e)
         {
             Photo nextProfilePhoto = m_YearSummarizer.GetNextProfilePhoto();
 
-
-
-            setPhotoToPictureBox(pictureBoxProfilePhotos, nextProfilePhoto);
+            if (nextProfilePhoto != null)
+            {
+                setPhotoToPictureBox(pictureBoxProfilePhotos, nextProfilePhoto);
+            }
         }
 
         private void buttonMoveToLeftPost_Click(object sender, EventArgs e)
         {
-            //if (m_PostListByYear != null && m_PostListByYear.Count > 0 && m_CurrentPostIndex != 0)
-            //{
-            //    m_CurrentProfilePhotoIndex--;
-            //    Post currentPost = m_PostListByYear[m_CurrentPostIndex];
-            //    this.labelPosts.Text = $"{currentPost.ToString()}"
-            //                           + $"Post Made In {currentPost.CreatedTime.ToString()}";
-            //}
+            Post previousPost = m_YearSummarizer.GetPreviousPost();
+
+            if (previousPost != null)
+            {
+                this.richTextBoxPosts.Text = previousPost.ToString() ?? "No description available.";
+            }
         }
 
         private void buttonMoveToRightPost_Click(object sender, EventArgs e)
         {
-            //if (m_PostListByYear != null && m_PostListByYear.Count > 0 && (m_CurrentPostIndex + 1) != m_PostListByYear.Count)
-            //{
-            //    m_CurrentProfilePhotoIndex++;
-            //    Post currentPost = m_PostListByYear[m_CurrentPostIndex];
-            //    this.labelPosts.Text = $"{currentPost.ToString()}"
-            //                           + $"Post Made In {currentPost.CreatedTime.ToString()}";
-            //}
+            Post nextPost = m_YearSummarizer.GetNextPost();
+
+            if (nextPost != null)
+            {
+                this.richTextBoxPosts.Text = nextPost.ToString() ?? "No description available.";
+            }
         }
     }
 }

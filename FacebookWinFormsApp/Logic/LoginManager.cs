@@ -56,7 +56,6 @@ namespace BasicFacebookFeatures.Logic
                 "user_gender",
                 "user_likes"
             );
-
             return !string.IsNullOrEmpty(LoginResult.AccessToken);
         }
 

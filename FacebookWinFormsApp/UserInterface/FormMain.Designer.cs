@@ -127,7 +127,7 @@ namespace BasicFacebookFeatures
             // 
             this.pictureBoxProfile.Location = new System.Drawing.Point(12, 7);
             this.pictureBoxProfile.Name = "pictureBoxProfile";
-            this.pictureBoxProfile.Size = new System.Drawing.Size(67, 52);
+            this.pictureBoxProfile.Size = new System.Drawing.Size(67, 65);
             this.pictureBoxProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxProfile.TabIndex = 62;
             this.pictureBoxProfile.TabStop = false;

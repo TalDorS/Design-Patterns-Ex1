@@ -1,4 +1,6 @@
-﻿namespace BasicFacebookFeatures.UserInterface
+﻿using System.Windows.Forms;
+
+namespace BasicFacebookFeatures.UserInterface
 {
     partial class FactsGeneratorForm
     {
@@ -31,8 +33,8 @@
             this.lblFact = new System.Windows.Forms.Label();
             this.buttonNextFact = new System.Windows.Forms.Button();
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.labelFacebook = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBoxFacebook = new System.Windows.Forms.PictureBox();
             this.pictureBoxFacts = new System.Windows.Forms.PictureBox();
             this.panelHeader.SuspendLayout();
@@ -70,14 +72,24 @@
             this.panelHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(87)))), ((int)(((byte)(157)))));
+            this.panelHeader.Controls.Add(this.label1);
             this.panelHeader.Controls.Add(this.labelFacebook);
-            this.panelHeader.Controls.Add(this.richTextBox1);
             this.panelHeader.Controls.Add(this.pictureBoxFacebook);
             this.panelHeader.Location = new System.Drawing.Point(1, -7);
-            this.panelHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelHeader.Margin = new System.Windows.Forms.Padding(4);
             this.panelHeader.Name = "panelHeader";
             this.panelHeader.Size = new System.Drawing.Size(819, 90);
             this.panelHeader.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(579, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(224, 16);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Made By Adva Levine and Tal Dor ©";
             // 
             // labelFacebook
             // 
@@ -85,33 +97,19 @@
             this.labelFacebook.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(87)))), ((int)(((byte)(157)))));
             this.labelFacebook.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFacebook.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelFacebook.Location = new System.Drawing.Point(68, 11);
+            this.labelFacebook.Location = new System.Drawing.Point(68, 14);
             this.labelFacebook.Name = "labelFacebook";
             this.labelFacebook.Size = new System.Drawing.Size(254, 63);
             this.labelFacebook.TabIndex = 15;
             this.labelFacebook.Text = "facebook";
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(87)))), ((int)(((byte)(157)))));
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(561, 66);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(257, 23);
-            this.richTextBox1.TabIndex = 14;
-            this.richTextBox1.Text = "Made By Adva Levine and Tal Dor ©";
-            // 
             // pictureBoxFacebook
             // 
             this.pictureBoxFacebook.Image = global::BasicFacebookFeatures.Properties.Resources.Facebook_logo;
             this.pictureBoxFacebook.Location = new System.Drawing.Point(7, 18);
-            this.pictureBoxFacebook.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxFacebook.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBoxFacebook.Name = "pictureBoxFacebook";
-            this.pictureBoxFacebook.Size = new System.Drawing.Size(55, 55);
+            this.pictureBoxFacebook.Size = new System.Drawing.Size(43, 42);
             this.pictureBoxFacebook.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxFacebook.TabIndex = 0;
             this.pictureBoxFacebook.TabStop = false;
@@ -155,9 +153,9 @@
         private System.Windows.Forms.Label lblFact;
         private System.Windows.Forms.Button buttonNextFact;
         private System.Windows.Forms.Panel panelHeader;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBoxFacebook;
         private System.Windows.Forms.Label labelFacebook;
         private System.Windows.Forms.PictureBox pictureBoxFacts;
+        private System.Windows.Forms.Label label1;
     }
 }

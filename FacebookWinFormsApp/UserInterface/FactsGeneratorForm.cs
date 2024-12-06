@@ -28,7 +28,6 @@ namespace BasicFacebookFeatures.UserInterface
             buttonNextFact.Enabled = false;
             string fact = m_FactGenerator.GenerateNextFact();
             lblFact.Text = fact;
-
             setImageForFact(m_FactGenerator.CurrentFact);
             applyRandomFontAndSize();
             applyRandomColor();
@@ -41,11 +40,6 @@ namespace BasicFacebookFeatures.UserInterface
             });
         }
 
-        private void btnNextFact_Click(object sender, EventArgs e)
-        {
-            DisplayNextFact();
-        }
-
         private void buttonNextFact_Click(object sender, EventArgs e)
         {
             DisplayNextFact();
@@ -54,7 +48,7 @@ namespace BasicFacebookFeatures.UserInterface
         private void applyRandomFontAndSize()
         {
             string[] fontFamilies = { "Arial", "Comic Sans MS", "Verdana", "Tahoma", "Times New Roman" };
-            int fontSize = m_Random.Next(10, 29); // Random font size between 10 and 28
+            int fontSize = m_Random.Next(13, 29); // Random font size between 13 and 28
             string fontFamily = fontFamilies[m_Random.Next(fontFamilies.Length)];
 
             lblFact.Font = new Font(fontFamily, fontSize, FontStyle.Bold);
@@ -105,11 +99,14 @@ namespace BasicFacebookFeatures.UserInterface
                         pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage; 
                     }
                     break;
-                case RandomFactGenerator.FactType.LikedPages: // New Fact
+                case RandomFactGenerator.FactType.LikedPages:
                     pictureBoxFacts.Image = Properties.Resources.LikedPagesImage; 
                     break;
-                case RandomFactGenerator.FactType.Groups: // New Fact
+                case RandomFactGenerator.FactType.Groups: 
                     pictureBoxFacts.Image = Properties.Resources.GroupsImage; 
+                    break;
+                case RandomFactGenerator.FactType.ZodiacSign: 
+                    pictureBoxFacts.Image = Properties.Resources.ZodiacImage;
                     break;
                 default:
                     pictureBoxFacts.Image = null;
@@ -127,7 +124,11 @@ namespace BasicFacebookFeatures.UserInterface
                 Color.Blue,
                 Color.Green,
                 Color.Purple,
-                Color.Orange
+                Color.Orange,
+                Color.Brown,
+                Color.Black,
+                Color.Yellow,
+                Color.Pink
             };
 
             lblFact.ForeColor = colors[m_Random.Next(colors.Length)];
@@ -140,5 +141,6 @@ namespace BasicFacebookFeatures.UserInterface
             lblFact.Left = (this.ClientSize.Width - lblFact.Width) / 2;
             lblFact.Top = (this.ClientSize.Height - lblFact.Height) / 2 - verticalOffset;
         }
+
     }
 }

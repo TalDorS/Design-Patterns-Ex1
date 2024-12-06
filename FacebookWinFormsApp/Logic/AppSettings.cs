@@ -11,6 +11,7 @@ namespace BasicFacebookFeatures.Logic
     public class AppSettings
     {
         public bool RememberUser { get; set; }
+        public DateTime LastLoginTime { get; set; } 
 
         public string LastAccessToken { get; set; }
 
@@ -18,6 +19,7 @@ namespace BasicFacebookFeatures.Logic
         {
             RememberUser = false;
             LastAccessToken = null;
+            LastLoginTime = DateTime.MinValue;
         }
 
         public void SaveToFile()

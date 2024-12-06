@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
-using System.Windows.Forms.VisualStyles;
-using System.Net.NetworkInformation;
-using BasicFacebookFeatures.Logic;
 using BasicFacebookFeatures.UserInterface;
+using BasicFacebookFeatures.Logic;
 
 namespace BasicFacebookFeatures
 {
@@ -24,6 +18,7 @@ namespace BasicFacebookFeatures
         private const string k_NoEventsMessage = "No events available";
         private const string k_NoPostsMessage = "No posts available";
         private readonly User r_LoggedInUser;
+        private DateTime lastLoginTime;
         private FactsGeneratorForm m_FactGenerator;
         private FormYearSummarization m_formYearSummarization;
 
@@ -34,13 +29,19 @@ namespace BasicFacebookFeatures
             InitializeComponent();
             FacebookWrapper.FacebookService.s_CollectionLimit = 25; 
             r_LoggedInUser = i_LoggedInUser;
+            AppSettings appSettings = AppSettings.LoadFromFile();
+            lastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
+
             populateLabels();
             populateUserPictureBox();
         }
 
         private void populateLabels()
         {
-            this.labelUser.Text = $"Hello, {r_LoggedInUser.Name}";
+            this.labelUser.Text = $"Hello, {r_LoggedInUser.Name}"; 
+            labelLastSeen.Text = lastLoginTime == DateTime.MinValue 
+                ? "First time login\n" 
+                : $"Last logged in:\n {lastLoginTime.ToString("f")}";
         }
 
         private void populateUserPictureBox()
@@ -50,7 +51,17 @@ namespace BasicFacebookFeatures
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
+            executeLogout();
+        }
+
+        private void executeLogout()
+        {
+            lastLoginTime = DateTime.Now;
             LogoutButtonClicked = true;
+            AppSettings appSettings = AppSettings.LoadFromFile();
+
+            appSettings.LastLoginTime = lastLoginTime;
+            appSettings.SaveToFile();
             FacebookService.Logout();
             this.Close();
         }
@@ -205,19 +216,52 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonGetInfo_Click(object sender, EventArgs e)
+        private void buttonGetInsights_Click(object sender, EventArgs e)
         {
-            populateInfoLabels();
+            buttonGetInsights.Enabled = false;
+            populateInsightsLabels();
+            buttonGetInsights.Enabled = true;
         }
 
-        private void populateInfoLabels()
+        private void populateInsightsLabels()
         {
-            this.labelName.Text = $"Your Name Is: {r_LoggedInUser.Name}";
-            this.labelBirthdayDate.Text = $"Your Birthday Date: {r_LoggedInUser.Birthday}";
-            this.labelNumberOfFriends.Text = $"You Have {r_LoggedInUser.Friends.Count} Friends";
-            this.labelGender.Text = $"Your Gender Is: {r_LoggedInUser.Gender.ToString()}";
-            this.labelNumOfPhotos.Text = $"You Have Uploaded {getNumberOfPhotos()} Photos";
-            this.labelNumberOfPosts.Text = $"You Have Made {r_LoggedInUser.Posts.Count.ToString()} Posts";
+            try
+            {
+                if (r_LoggedInUser.Posts?.Count > 0 && r_LoggedInUser.Posts[r_LoggedInUser.Posts.Count - 1].CreatedTime.HasValue)
+                {
+                    labelJoinedFacebook.Text = $"You joined Facebook on: {r_LoggedInUser.Posts[r_LoggedInUser.Posts.Count - 1].CreatedTime.Value.ToShortDateString()}";
+                }
+                else
+                {
+                    labelJoinedFacebook.Text = "Join date information unavailable.";
+                }
+
+                labelFirstFirend.Text = r_LoggedInUser.Friends?.Count > 0
+                    ? $"Your first friend on Facebook was: {r_LoggedInUser.Friends[0].Name}"
+                    : "No friends found.";
+
+                if (r_LoggedInUser.Posts?.Count > 0 && r_LoggedInUser.Posts[0].CreatedTime.HasValue)
+                {
+                    labelFirstPost.Text = $"You made your first post on: {r_LoggedInUser.Posts[0].CreatedTime.Value.ToShortDateString()}";
+                }
+                else
+                {
+                    labelFirstPost.Text = "No posts found.";
+                }
+
+                if (r_LoggedInUser.Checkins?.Count > 0 && r_LoggedInUser.Checkins[0].CreatedTime.HasValue)
+                {
+                    labelFirstCheckin.Text = $"You made your first check-in on: {r_LoggedInUser.Checkins[0].CreatedTime.Value.ToShortDateString()}";
+                }
+                else
+                {
+                    labelFirstCheckin.Text = "No check-ins found.";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching insights: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private int getNumberOfPhotos()

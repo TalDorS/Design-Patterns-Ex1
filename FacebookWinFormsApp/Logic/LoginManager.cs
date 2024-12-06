@@ -66,6 +66,13 @@ namespace BasicFacebookFeatures.Logic
             AppSettings.RememberUser = i_IsRememberMeChecked;
             AppSettings.LastAccessToken = i_IsRememberMeChecked ? LoginResult.AccessToken : null;
 
+            // Save LastLoginTime only if "Remember Me" is checked and the user is logged in
+            if (i_IsRememberMeChecked && !string.IsNullOrEmpty(LoginResult.AccessToken))
+            {
+                AppSettings.LastLoginTime = DateTime.Now;  // Save the current login time
+            }
+
+
             try
             {
                 AppSettings.SaveToFile();

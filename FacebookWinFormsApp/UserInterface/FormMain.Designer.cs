@@ -144,7 +144,7 @@ namespace BasicFacebookFeatures
             this.panelHeader.Controls.Add(this.pictureBoxProfile);
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(950, 90);
+            this.panelHeader.Size = new System.Drawing.Size(956, 90);
             this.panelHeader.TabIndex = 68;
             // 
             // labelUser
@@ -344,7 +344,7 @@ namespace BasicFacebookFeatures
             this.groupBoxInfo.ForeColor = System.Drawing.Color.Pink;
             this.groupBoxInfo.Location = new System.Drawing.Point(12, 90);
             this.groupBoxInfo.Name = "groupBoxInfo";
-            this.groupBoxInfo.Size = new System.Drawing.Size(333, 492);
+            this.groupBoxInfo.Size = new System.Drawing.Size(318, 489);
             this.groupBoxInfo.TabIndex = 73;
             this.groupBoxInfo.TabStop = false;
             this.groupBoxInfo.Text = "Your Profile";
@@ -517,7 +517,7 @@ namespace BasicFacebookFeatures
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(760, 462);
+            this.ClientSize = new System.Drawing.Size(950, 578);
             this.Controls.Add(this.groupBoxNotifications);
             this.Controls.Add(this.groupBoxLastSeen);
             this.Controls.Add(this.buttonGetInsights);
@@ -530,8 +530,6 @@ namespace BasicFacebookFeatures
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FaceBook WinForms";

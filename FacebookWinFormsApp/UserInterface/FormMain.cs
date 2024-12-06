@@ -32,6 +32,7 @@ namespace BasicFacebookFeatures
             AppSettings appSettings = AppSettings.LoadFromFile();
             lastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
 
+            ClearNotifications();
             populateLabels();
             populateUserPictureBox();
         }
@@ -47,6 +48,11 @@ namespace BasicFacebookFeatures
         private void populateUserPictureBox()
         {
             pictureBoxProfile.LoadAsync(r_LoggedInUser.PictureNormalURL);
+        }
+
+        private void ClearNotifications()
+        {
+            listBoxNotifications.Items.Clear();
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -93,7 +99,15 @@ namespace BasicFacebookFeatures
 
         private void loadFriends()
         {
-            populateListBox(listBoxFriendsList, r_LoggedInUser.Friends, k_DisplayMemberName, k_NoFriendsMessage);
+            try
+            {
+                populateListBox(listBoxFriendsList, r_LoggedInUser.Friends, k_DisplayMemberName, k_NoFriendsMessage);
+                AddNotification("Successfully loaded friends.");
+            }
+            catch (Exception ex)
+            {
+                AddNotification($"Failed to load friends: {ex.Message}");
+            }
         }
 
         private void listBoxFriendsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -123,7 +137,15 @@ namespace BasicFacebookFeatures
 
         private void loadGroups()
         {
-            populateListBox(listBoxGroupsList, r_LoggedInUser.Groups, k_DisplayMemberName, k_NoGroupsMessage);
+            try
+            {
+                populateListBox(listBoxGroupsList, r_LoggedInUser.Groups, k_DisplayMemberName, k_NoGroupsMessage);
+                AddNotification("Successfully loaded groups.");
+            }
+            catch (Exception ex)
+            {
+                AddNotification($"Failed to load groups: {ex.Message}");
+            }
         }
 
         private void listBoxGroupsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -153,7 +175,15 @@ namespace BasicFacebookFeatures
 
         private void loadEvents()
         {
-            populateListBox(listBoxEventsList, r_LoggedInUser.Events, k_DisplayMemberName, k_NoEventsMessage);
+            try
+            {
+                populateListBox(listBoxEventsList, r_LoggedInUser.Events, k_DisplayMemberName, k_NoEventsMessage);
+                AddNotification("Successfully loaded events.");
+            }
+            catch (Exception ex)
+            {
+                AddNotification($"Failed to load events: {ex.Message}");
+            }
         }
 
         private void listBoxEventsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -183,7 +213,15 @@ namespace BasicFacebookFeatures
 
         private void loadPosts()
         {
-            populateListBox(listBoxPosts, r_LoggedInUser.Posts, k_DisplayMemberMessage, k_NoPostsMessage);
+            try
+            {
+                populateListBox(listBoxPosts, r_LoggedInUser.Posts, k_DisplayMemberMessage, k_NoPostsMessage);
+                AddNotification("Successfully loaded posts.");
+            }
+            catch (Exception ex)
+            {
+                AddNotification($"Failed to load posts: {ex.Message}");
+            }
         }
 
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
@@ -220,6 +258,7 @@ namespace BasicFacebookFeatures
         {
             buttonGetInsights.Enabled = false;
             populateInsightsLabels();
+            AddNotification("Successfully loaded posts.");
             buttonGetInsights.Enabled = true;
         }
 
@@ -308,5 +347,18 @@ namespace BasicFacebookFeatures
                 MessageBox.Show(i_EmptyMessage);
             }
         }
+
+        private void AddNotification(string notificationMessage)
+        {
+            listBoxNotifications.Items.Add($"{DateTime.Now.ToShortTimeString()} - {notificationMessage}");
+
+            listBoxNotifications.SelectedIndex = listBoxNotifications.Items.Count - 1;
+
+            if (listBoxNotifications.Items.Count > 5) 
+            {
+                listBoxNotifications.Items.RemoveAt(0);
+            }
+        }
+
     }
 }

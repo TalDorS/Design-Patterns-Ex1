@@ -62,12 +62,7 @@ namespace BasicFacebookFeatures
 
         private void executeLogout()
         {
-            lastLoginTime = DateTime.Now;
             LogoutButtonClicked = true;
-            AppSettings appSettings = AppSettings.LoadFromFile();
-
-            appSettings.LastLoginTime = lastLoginTime;
-            appSettings.SaveToFile();
             FacebookService.Logout();
             this.Close();
         }
@@ -258,7 +253,7 @@ namespace BasicFacebookFeatures
         {
             buttonGetInsights.Enabled = false;
             populateInsightsLabels();
-            AddNotification("Successfully loaded posts.");
+            AddNotification("Successfully loaded insights.");
             buttonGetInsights.Enabled = true;
         }
 
@@ -354,7 +349,7 @@ namespace BasicFacebookFeatures
 
             listBoxNotifications.SelectedIndex = listBoxNotifications.Items.Count - 1;
 
-            if (listBoxNotifications.Items.Count > 5) 
+            if (listBoxNotifications.Items.Count > 10) 
             {
                 listBoxNotifications.Items.RemoveAt(0);
             }

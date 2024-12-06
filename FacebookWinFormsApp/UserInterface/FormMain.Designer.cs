@@ -144,7 +144,7 @@ namespace BasicFacebookFeatures
             this.panelHeader.Controls.Add(this.pictureBoxProfile);
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(956, 90);
+            this.panelHeader.Size = new System.Drawing.Size(956, 76);
             this.panelHeader.TabIndex = 68;
             // 
             // labelUser
@@ -341,10 +341,11 @@ namespace BasicFacebookFeatures
             this.groupBoxInfo.Controls.Add(this.groupBoxEvents);
             this.groupBoxInfo.Controls.Add(this.groupBoxGroups);
             this.groupBoxInfo.Controls.Add(this.buttonViewGroups);
+            this.groupBoxInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxInfo.ForeColor = System.Drawing.Color.Pink;
-            this.groupBoxInfo.Location = new System.Drawing.Point(12, 90);
+            this.groupBoxInfo.Location = new System.Drawing.Point(12, 82);
             this.groupBoxInfo.Name = "groupBoxInfo";
-            this.groupBoxInfo.Size = new System.Drawing.Size(318, 489);
+            this.groupBoxInfo.Size = new System.Drawing.Size(333, 497);
             this.groupBoxInfo.TabIndex = 73;
             this.groupBoxInfo.TabStop = false;
             this.groupBoxInfo.Text = "Your Profile";
@@ -388,7 +389,7 @@ namespace BasicFacebookFeatures
             this.buttonViewPosts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(179)))), ((int)(((byte)(93)))));
             this.buttonViewPosts.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonViewPosts.ForeColor = System.Drawing.Color.White;
-            this.buttonViewPosts.Location = new System.Drawing.Point(558, 527);
+            this.buttonViewPosts.Location = new System.Drawing.Point(558, 532);
             this.buttonViewPosts.Name = "buttonViewPosts";
             this.buttonViewPosts.Size = new System.Drawing.Size(151, 39);
             this.buttonViewPosts.TabIndex = 75;
@@ -437,7 +438,7 @@ namespace BasicFacebookFeatures
             this.groupBoxFacebookUsageInsights.Controls.Add(this.labelJoinedFacebook);
             this.groupBoxFacebookUsageInsights.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxFacebookUsageInsights.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(69)))), ((int)(((byte)(170)))));
-            this.groupBoxFacebookUsageInsights.Location = new System.Drawing.Point(351, 92);
+            this.groupBoxFacebookUsageInsights.Location = new System.Drawing.Point(351, 84);
             this.groupBoxFacebookUsageInsights.Name = "groupBoxFacebookUsageInsights";
             this.groupBoxFacebookUsageInsights.Size = new System.Drawing.Size(378, 148);
             this.groupBoxFacebookUsageInsights.TabIndex = 76;
@@ -460,7 +461,7 @@ namespace BasicFacebookFeatures
             this.buttonGetInsights.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(69)))), ((int)(((byte)(170)))));
             this.buttonGetInsights.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGetInsights.ForeColor = System.Drawing.Color.White;
-            this.buttonGetInsights.Location = new System.Drawing.Point(735, 194);
+            this.buttonGetInsights.Location = new System.Drawing.Point(735, 204);
             this.buttonGetInsights.Name = "buttonGetInsights";
             this.buttonGetInsights.Size = new System.Drawing.Size(149, 36);
             this.buttonGetInsights.TabIndex = 77;
@@ -472,8 +473,8 @@ namespace BasicFacebookFeatures
             // 
             this.groupBoxLastSeen.Controls.Add(this.labelLastSeen);
             this.groupBoxLastSeen.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxLastSeen.ForeColor = System.Drawing.Color.Fuchsia;
-            this.groupBoxLastSeen.Location = new System.Drawing.Point(742, 93);
+            this.groupBoxLastSeen.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            this.groupBoxLastSeen.Location = new System.Drawing.Point(742, 85);
             this.groupBoxLastSeen.Name = "groupBoxLastSeen";
             this.groupBoxLastSeen.Size = new System.Drawing.Size(195, 88);
             this.groupBoxLastSeen.TabIndex = 81;
@@ -518,13 +519,13 @@ namespace BasicFacebookFeatures
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(950, 578);
+            this.Controls.Add(this.groupBoxInfo);
             this.Controls.Add(this.groupBoxNotifications);
             this.Controls.Add(this.groupBoxLastSeen);
             this.Controls.Add(this.buttonGetInsights);
             this.Controls.Add(this.groupBoxFacebookUsageInsights);
             this.Controls.Add(this.groupBoxPosts);
             this.Controls.Add(this.buttonViewPosts);
-            this.Controls.Add(this.groupBoxInfo);
             this.Controls.Add(this.groupBoxExclusiveFeatures);
             this.Controls.Add(this.panelHeader);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

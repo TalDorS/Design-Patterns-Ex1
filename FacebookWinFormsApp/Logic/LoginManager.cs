@@ -25,7 +25,7 @@ namespace BasicFacebookFeatures.Logic
 
         private bool loginWithExistingToken()
         {
-            if (IsAccessTokenValid)
+            if (LoginResult.AccessToken != null)
             {
                 LoginResult = FacebookService.Connect(LoginResult.AccessToken);
                 if (string.IsNullOrEmpty(LoginResult.AccessToken))
@@ -38,6 +38,11 @@ namespace BasicFacebookFeatures.Logic
             {
                 return loginWithNewToken();
             }
+        }
+
+        public void SetLoginResult(LoginResult loginResult)
+        {
+            LoginResult = loginResult;
         }
 
         public bool loginWithNewToken()
@@ -66,12 +71,10 @@ namespace BasicFacebookFeatures.Logic
             AppSettings.RememberUser = i_IsRememberMeChecked;
             AppSettings.LastAccessToken = i_IsRememberMeChecked ? LoginResult.AccessToken : null;
 
-            // Save LastLoginTime only if "Remember Me" is checked and the user is logged in
             if (i_IsRememberMeChecked && !string.IsNullOrEmpty(LoginResult.AccessToken))
             {
-                AppSettings.LastLoginTime = DateTime.Now;  // Save the current login time
+                AppSettings.LastLoginTime = DateTime.Now;
             }
-
 
             try
             {
@@ -83,6 +86,8 @@ namespace BasicFacebookFeatures.Logic
             }
         }
 
+
+
         public bool LoadAppSettingsIfExists()
         {
             AppSettings = AppSettings.LoadFromFile();
@@ -91,7 +96,6 @@ namespace BasicFacebookFeatures.Logic
                 LoginResult = FacebookService.Connect(AppSettings.LastAccessToken);
                 IsAccessTokenValid = !string.IsNullOrEmpty(LoginResult.AccessToken);
             }
-
             return IsAccessTokenValid;
         }
     }

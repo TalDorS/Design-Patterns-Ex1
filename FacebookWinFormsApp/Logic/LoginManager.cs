@@ -25,20 +25,15 @@ namespace BasicFacebookFeatures.Logic
 
         private bool loginWithExistingToken()
         {
-            if (LoginResult.AccessToken != null)
-            {
-                LoginResult = FacebookService.Connect(LoginResult.AccessToken);
-                if (string.IsNullOrEmpty(LoginResult.AccessToken))
-                {
-                    return loginWithNewToken();
-                }
-                return true; 
-            }
-            else
-            {
-                return loginWithNewToken();
-            }
+            LoginResult = (LoginResult.AccessToken != null)
+                ? FacebookService.Connect(LoginResult.AccessToken)
+                : null;
+
+            return !string.IsNullOrEmpty(LoginResult?.AccessToken)
+                ? true
+                : loginWithNewToken();
         }
+
 
         public void SetLoginResult(LoginResult loginResult)
         {
@@ -61,7 +56,6 @@ namespace BasicFacebookFeatures.Logic
                 "user_gender",
                 "user_likes"
             );
-            // removed user_groups
 
             return !string.IsNullOrEmpty(LoginResult.AccessToken);
         }
@@ -85,8 +79,6 @@ namespace BasicFacebookFeatures.Logic
                 throw e;
             }
         }
-
-
 
         public bool LoadAppSettingsIfExists()
         {

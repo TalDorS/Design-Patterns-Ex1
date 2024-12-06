@@ -69,7 +69,7 @@ namespace BasicFacebookFeatures.UI
             FacebookService.Logout();
             LoginManager.SetLoginResult(null); 
             buttonLoginAsNewUser.Enabled = false;
-            LoginManager.IsAccessTokenValid = !k_NewLoginToken;
+            LoginManager.IsAccessTokenValid = false;
             executeLogin();
             buttonLoginAsNewUser.Enabled = true;
         }
@@ -162,6 +162,7 @@ namespace BasicFacebookFeatures.UI
                     buttonLoginAs.Enabled = true;
                     buttonLoginAsNewUser.Enabled = true;
                     RememberUser = false;
+                    LoginManager.IsAccessTokenValid = true;
                     checkBoxRememberMe.Checked = false;
                     switchForms();
                 }

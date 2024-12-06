@@ -37,6 +37,7 @@ namespace BasicFacebookFeatures.UserInterface
             this.labelFacebook = new System.Windows.Forms.Label();
             this.pictureBoxFacebook = new System.Windows.Forms.PictureBox();
             this.pictureBoxFacts = new System.Windows.Forms.PictureBox();
+            this.buttonShareFact = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacebook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacts)).BeginInit();
@@ -124,11 +125,25 @@ namespace BasicFacebookFeatures.UserInterface
             this.pictureBoxFacts.TabIndex = 16;
             this.pictureBoxFacts.TabStop = false;
             // 
+            // buttonShareFact
+            // 
+            this.buttonShareFact.BackColor = System.Drawing.Color.Pink;
+            this.buttonShareFact.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonShareFact.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonShareFact.Location = new System.Drawing.Point(8, 466);
+            this.buttonShareFact.Name = "buttonShareFact";
+            this.buttonShareFact.Size = new System.Drawing.Size(113, 59);
+            this.buttonShareFact.TabIndex = 17;
+            this.buttonShareFact.Text = "Share Fact!";
+            this.buttonShareFact.UseVisualStyleBackColor = false;
+            this.buttonShareFact.Click += new System.EventHandler(this.buttonShareFact_Click);
+            // 
             // FactsGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(819, 537);
+            this.Controls.Add(this.buttonShareFact);
             this.Controls.Add(this.pictureBoxFacts);
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.buttonNextFact);
@@ -157,5 +172,6 @@ namespace BasicFacebookFeatures.UserInterface
         private System.Windows.Forms.Label labelFacebook;
         private System.Windows.Forms.PictureBox pictureBoxFacts;
         private System.Windows.Forms.Label label1;
+        private Button buttonShareFact;
     }
 }

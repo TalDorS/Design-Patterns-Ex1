@@ -142,5 +142,16 @@ namespace BasicFacebookFeatures.UserInterface
             lblFact.Top = (this.ClientSize.Height - lblFact.Height) / 2 - verticalOffset;
         }
 
+        private void buttonShareFact_Click(object sender, EventArgs e)
+        {
+            executeShareFact();
+        }
+
+        private void executeShareFact()
+        {
+            string factToShare = lblFact.Text;
+            Clipboard.SetText(factToShare); 
+            MessageBox.Show("Fact copied to clipboard! Share it with your friends!");
+        }
     }
 }

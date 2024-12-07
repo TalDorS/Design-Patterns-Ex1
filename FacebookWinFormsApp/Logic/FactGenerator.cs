@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace BasicFacebookFeatures.Logic
 {
-    public class RandomFactGenerator
+    public class FactGenerator
     {
         public enum FactType
         {
@@ -26,7 +26,7 @@ namespace BasicFacebookFeatures.Logic
         private readonly List<FactType> m_Facts;
         private int m_FactIndex;
 
-        public RandomFactGenerator(User i_LoggedInUser)
+        public FactGenerator(User i_LoggedInUser)
         {
             r_LoggedInUser = i_LoggedInUser ?? throw new ArgumentNullException(nameof(i_LoggedInUser));
             m_Facts = new List<FactType>

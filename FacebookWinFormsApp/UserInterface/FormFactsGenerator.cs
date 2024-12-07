@@ -7,18 +7,18 @@ using System.Windows.Forms;
 
 namespace BasicFacebookFeatures.UserInterface
 {
-    public partial class FactsGeneratorForm : Form
+    public partial class FormFactsGenerator : Form
     {
 
         private readonly User r_LoggedInUser;
-        private RandomFactGenerator m_FactGenerator;
+        private FactGenerator m_FactGenerator;
         private readonly Random m_Random;
 
-        public FactsGeneratorForm(User i_LoggedInUser)
+        public FormFactsGenerator(User i_LoggedInUser)
         {
             InitializeComponent();
             r_LoggedInUser = i_LoggedInUser;
-            m_FactGenerator = new RandomFactGenerator(r_LoggedInUser);
+            m_FactGenerator = new FactGenerator(r_LoggedInUser);
             m_Random = new Random();
             DisplayNextFact();
         }
@@ -57,32 +57,32 @@ namespace BasicFacebookFeatures.UserInterface
             lblFact.AutoSize = false;
             lblFact.TextAlign = ContentAlignment.TopCenter;
         }
-        private void setImageForFact(RandomFactGenerator.FactType factType)
+        private void setImageForFact(FactGenerator.FactType factType)
         {
             switch (factType)
             {
-                case RandomFactGenerator.FactType.Friends:
+                case FactGenerator.FactType.Friends:
                     pictureBoxFacts.Image = Properties.Resources.FriendsImage; 
                     break;
-                case RandomFactGenerator.FactType.Posts:
+                case FactGenerator.FactType.Posts:
                     pictureBoxFacts.Image = Properties.Resources.PostsImage; 
                     break;
-                case RandomFactGenerator.FactType.Age:
+                case FactGenerator.FactType.Age:
                     pictureBoxFacts.Image = Properties.Resources.AgeImage; 
                     break;
-                case RandomFactGenerator.FactType.RelationshipStatus:
+                case FactGenerator.FactType.RelationshipStatus:
                     pictureBoxFacts.Image = Properties.Resources.RelationshipImage; 
                     break;
-                case RandomFactGenerator.FactType.Hometown:
+                case FactGenerator.FactType.Hometown:
                     pictureBoxFacts.Image = Properties.Resources.HometownImage;
                     break;
-                case RandomFactGenerator.FactType.Gender:
+                case FactGenerator.FactType.Gender:
                     pictureBoxFacts.Image = Properties.Resources.GenderImage; 
                     break;
-                case RandomFactGenerator.FactType.Birthday:
+                case FactGenerator.FactType.Birthday:
                     pictureBoxFacts.Image = Properties.Resources.BirthdayImage; 
                     break;
-                case RandomFactGenerator.FactType.ProfilePicture:
+                case FactGenerator.FactType.ProfilePicture:
                     if (Uri.IsWellFormedUriString(r_LoggedInUser.PictureNormalURL, UriKind.Absolute))
                     {
                         try
@@ -99,13 +99,13 @@ namespace BasicFacebookFeatures.UserInterface
                         pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage; 
                     }
                     break;
-                case RandomFactGenerator.FactType.LikedPages:
+                case FactGenerator.FactType.LikedPages:
                     pictureBoxFacts.Image = Properties.Resources.LikedPagesImage; 
                     break;
-                case RandomFactGenerator.FactType.Groups: 
+                case FactGenerator.FactType.Groups: 
                     pictureBoxFacts.Image = Properties.Resources.GroupsImage; 
                     break;
-                case RandomFactGenerator.FactType.ZodiacSign: 
+                case FactGenerator.FactType.ZodiacSign: 
                     pictureBoxFacts.Image = Properties.Resources.ZodiacImage;
                     break;
                 default:

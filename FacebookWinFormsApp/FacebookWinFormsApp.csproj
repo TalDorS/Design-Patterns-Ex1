@@ -79,13 +79,13 @@
   <ItemGroup>
     <Compile Include="Logic\AppSettings.cs" />
     <Compile Include="Logic\LoginManager.cs" />
-    <Compile Include="Logic\RandomFactGenerator.cs" />
+    <Compile Include="Logic\FactGenerator.cs" />
     <Compile Include="Logic\YearSummarizer.cs" />
-    <Compile Include="UserInterface\FactsGeneratorForm.cs">
+    <Compile Include="UserInterface\FormFactsGenerator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserInterface\FactsGeneratorForm.Designer.cs">
-      <DependentUpon>FactsGeneratorForm.cs</DependentUpon>
+    <Compile Include="UserInterface\FormFactsGenerator.Designer.cs">
+      <DependentUpon>FormFactsGenerator.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\FormLogin.cs">
       <SubType>Form</SubType>
@@ -107,8 +107,8 @@
     <Compile Include="UserInterface\FormYearSummarization.Designer.cs">
       <DependentUpon>FormYearSummarization.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserInterface\FactsGeneratorForm.resx">
-      <DependentUpon>FactsGeneratorForm.cs</DependentUpon>
+    <EmbeddedResource Include="UserInterface\FormFactsGenerator.resx">
+      <DependentUpon>FormFactsGenerator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>

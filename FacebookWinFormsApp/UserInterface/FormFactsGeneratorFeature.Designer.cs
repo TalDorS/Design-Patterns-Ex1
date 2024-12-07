@@ -2,7 +2,7 @@
 
 namespace BasicFacebookFeatures.UserInterface
 {
-    partial class FormFactsGenerator
+    partial class FormFactsGeneratorFeature
     {
         /// <summary>
         /// Required designer variable.

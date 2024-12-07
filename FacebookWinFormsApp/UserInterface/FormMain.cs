@@ -18,7 +18,7 @@ namespace BasicFacebookFeatures
         private const string k_NoPostsMessage = "No posts available";
         private readonly User r_LoggedInUser;
         private DateTime lastLoginTime;
-        private FormFactsGenerator m_FactGenerator;
+        private FormFactsGeneratorFeature m_FactGenerator;
         private FormYearSummarization m_formYearSummarization;
 
         public bool LogoutButtonClicked { get; private set; }
@@ -70,7 +70,7 @@ namespace BasicFacebookFeatures
         {
             if(m_FactGenerator == null)
             {
-                m_FactGenerator = new FormFactsGenerator(r_LoggedInUser);
+                m_FactGenerator = new FormFactsGeneratorFeature(r_LoggedInUser);
             }
 
             m_FactGenerator.ShowDialog();

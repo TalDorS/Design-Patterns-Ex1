@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using BasicFacebookFeatures.UI;
 using BasicFacebookFeatures.UserInterface;
 using FacebookWrapper;
 

@@ -1,4 +1,4 @@
-﻿namespace BasicFacebookFeatures.UI
+﻿namespace BasicFacebookFeatures.UserInterface
 {
     partial class FormLogin
     {

@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace BasicFacebookFeatures.UI
+namespace BasicFacebookFeatures.UserInterface
 {
     public partial class FormLogin : Form
     {

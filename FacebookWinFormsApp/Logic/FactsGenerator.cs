@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace BasicFacebookFeatures.Logic
 {
-    public class RandomFactGenerator
+    public class FactsGenerator
     {
         public enum FactType
         {
@@ -18,14 +18,15 @@ namespace BasicFacebookFeatures.Logic
             Birthday,
             ProfilePicture,
             LikedPages, 
-            Groups
+            Groups,
+            ZodiacSign
         }
 
         private readonly User r_LoggedInUser;
         private readonly List<FactType> m_Facts;
         private int m_FactIndex;
 
-        public RandomFactGenerator(User i_LoggedInUser)
+        public FactsGenerator(User i_LoggedInUser)
         {
             r_LoggedInUser = i_LoggedInUser ?? throw new ArgumentNullException(nameof(i_LoggedInUser));
             m_Facts = new List<FactType>
@@ -39,10 +40,13 @@ namespace BasicFacebookFeatures.Logic
                 FactType.Birthday,
                 FactType.ProfilePicture,
                 FactType.LikedPages,
-                FactType.Groups
+                FactType.Groups,
+                FactType.ZodiacSign 
             };
+
             m_FactIndex = 0;
         }
+
         public FactType CurrentFact
         {
             get
@@ -54,6 +58,55 @@ namespace BasicFacebookFeatures.Logic
 
                 return m_Facts[m_FactIndex - 1];
             }
+        }
+
+        private string getZodiacSign(DateTime birthday)
+        {
+            int month = birthday.Month;
+            int day = birthday.Day;
+            string zodiacSign = "Unknown";
+
+            switch (month)
+            {
+                case 1:
+                    zodiacSign = day <= 19 ? "Capricorn" : "Aquarius";
+                    break;
+                case 2:
+                    zodiacSign = day <= 18 ? "Aquarius" : "Pisces";
+                    break;
+                case 3:
+                    zodiacSign = day <= 20 ? "Pisces" : "Aries";
+                    break;
+                case 4:
+                    zodiacSign = day <= 19 ? "Aries" : "Taurus";
+                    break;
+                case 5:
+                    zodiacSign = day <= 20 ? "Taurus" : "Gemini";
+                    break;
+                case 6:
+                    zodiacSign = day <= 20 ? "Gemini" : "Cancer";
+                    break;
+                case 7:
+                    zodiacSign = day <= 22 ? "Cancer" : "Leo";
+                    break;
+                case 8:
+                    zodiacSign = day <= 22 ? "Leo" : "Virgo";
+                    break;
+                case 9:
+                    zodiacSign = day <= 22 ? "Virgo" : "Libra";
+                    break;
+                case 10:
+                    zodiacSign = day <= 22 ? "Libra" : "Scorpio";
+                    break;
+                case 11:
+                    zodiacSign = day <= 21 ? "Scorpio" : "Sagittarius";
+                    break;
+                case 12:
+                    zodiacSign = day <= 21 ? "Sagittarius" : "Capricorn";
+                    break;
+            }
+
+            return zodiacSign;
         }
 
         public string executeGenerator()
@@ -74,6 +127,7 @@ namespace BasicFacebookFeatures.Logic
 
         public string GenerateNextFact()
         {
+
             if (r_LoggedInUser == null)
             {
                 throw new InvalidOperationException("User is not logged in.");
@@ -90,16 +144,17 @@ namespace BasicFacebookFeatures.Logic
             switch (currentFact)
             {
                 case FactType.Friends:
-                    fact = $"You have {r_LoggedInUser.Friends.Count} friends!";
+                    fact = r_LoggedInUser.Friends.Count > 0 ? $"You have {r_LoggedInUser.Friends.Count} friends!" : "You have no friends on Facebook.";
                     break;
                 case FactType.Posts:
-                    fact = $"You've made {r_LoggedInUser.Posts.Count} posts so far!";
+                    fact = r_LoggedInUser.Posts.Count > 0 ? $"You've made {r_LoggedInUser.Posts.Count} posts so far!" : "You haven't made any posts yet.";
                     break;
                 case FactType.Age:
-                    if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime birthday))
+                    if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime io_birthday))
                     {
-                        int age = DateTime.Now.Year - birthday.Year;
-                        if (birthday.Date > DateTime.Now.AddYears(-age)) age--;
+                        int age = DateTime.Now.Year - io_birthday.Year;
+
+                        if (io_birthday.Date > DateTime.Now.AddYears(-age)) age--;
                         fact = $"You are {age} years old!";
                     }
                     break;
@@ -123,6 +178,17 @@ namespace BasicFacebookFeatures.Logic
                     break;
                 case FactType.Groups: 
                     fact = $"You are a member of {r_LoggedInUser.Groups.Count} groups.";
+                    break;
+                case FactType.ZodiacSign: 
+                    if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime io_zodiacBirthday))
+                    {
+                        string zodiacSign = getZodiacSign(io_zodiacBirthday);
+                        fact = $"Your zodiac sign is {zodiacSign}!";
+                    }
+                    else
+                    {
+                        fact = "Unable to determine your zodiac sign.";
+                    }
                     break;
                 default:
                     return "Fact unavailable.";

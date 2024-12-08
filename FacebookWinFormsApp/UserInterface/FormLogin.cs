@@ -1,16 +1,10 @@
 ﻿using BasicFacebookFeatures.Logic;
 using FacebookWrapper;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BasicFacebookFeatures.UI
+namespace BasicFacebookFeatures.UserInterface
 {
     public partial class FormLogin : Form
     {
@@ -36,17 +30,19 @@ namespace BasicFacebookFeatures.UI
             updateLoginButtonState();
         }
 
+
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
             checkBoxRememberMe.Checked = LoginManager.LoadAppSettingsIfExists();
             RememberUser = checkBoxRememberMe.Checked;
+
             if (RememberUser)
             {
                 updateUIWithExistingUser();
             }
             updateLoginButtonState();
-
+            checkBoxRememberMe.Checked = false;
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -65,11 +61,11 @@ namespace BasicFacebookFeatures.UI
         private void buttonLoginAsNewUser_Click(object sender, EventArgs e)
         {
             FacebookService.Logout();
+            LoginManager.SetLoginResult(null); 
             buttonLoginAsNewUser.Enabled = false;
-            LoginManager.IsAccessTokenValid = !k_NewLoginToken;
+            LoginManager.IsAccessTokenValid = false;
             executeLogin();
             buttonLoginAsNewUser.Enabled = true;
-
         }
 
         private void switchForms()
@@ -124,9 +120,16 @@ namespace BasicFacebookFeatures.UI
 
         private void executeLogin()
         {
+            RememberUser = checkBoxRememberMe.Checked;
             bool isSuccessfulLogin = LoginManager.LoginToFacebook();
+            
+            if (isSuccessfulLogin && RememberUser)
+            {
 
-            if (isSuccessfulLogin)
+               updateUIWithExistingUser();
+ 
+            }
+            else if (isSuccessfulLogin)
             {
                 initiateFacebookFormAfterLogin();
             }
@@ -146,12 +149,15 @@ namespace BasicFacebookFeatures.UI
         {
             try
             {
-                if (LoginManager.IsAccessTokenValid && LoginManager.LoginResult.AccessToken != null)
+                if (LoginManager.LoginResult.AccessToken != null && RememberUser)
                 {
                     FormMain = new FormMain(LoginManager.LoginResult.LoggedInUser);
                     buttonLoginAs.Text = string.Format(k_LoginAsUserPlaceholder, LoginManager.LoginResult.LoggedInUser.Name);
-                    buttonLoginAs.Enabled = false;
+                    buttonLoginAs.Enabled = true;
                     buttonLoginAsNewUser.Enabled = true;
+                    RememberUser = false;
+                    LoginManager.IsAccessTokenValid = true;
+                    checkBoxRememberMe.Checked = false;
                     switchForms();
                 }
                 else
@@ -175,6 +181,6 @@ namespace BasicFacebookFeatures.UI
             {
                 buttonLoginAs.Enabled = true;
             }
-        }
+        }   
     }
 }

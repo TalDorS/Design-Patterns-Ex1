@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
-using System.Windows.Forms.VisualStyles;
-using System.Net.NetworkInformation;
-using BasicFacebookFeatures.Logic;
 using BasicFacebookFeatures.UserInterface;
+using BasicFacebookFeatures.Logic;
 
 namespace BasicFacebookFeatures
 {
@@ -24,7 +17,8 @@ namespace BasicFacebookFeatures
         private const string k_NoEventsMessage = "No events available";
         private const string k_NoPostsMessage = "No posts available";
         private readonly User r_LoggedInUser;
-        private FactsGeneratorForm m_FactGenerator;
+        private DateTime lastLoginTime;
+        private FormFactsGeneratorFeature m_FactGenerator;
         private FormYearSummarization m_formYearSummarization;
 
         public bool LogoutButtonClicked { get; private set; }
@@ -34,13 +28,20 @@ namespace BasicFacebookFeatures
             InitializeComponent();
             FacebookWrapper.FacebookService.s_CollectionLimit = 25; 
             r_LoggedInUser = i_LoggedInUser;
+            AppSettings appSettings = AppSettings.LoadFromFile();
+            lastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
+
+            ClearNotifications();
             populateLabels();
             populateUserPictureBox();
         }
 
         private void populateLabels()
         {
-            this.labelUser.Text = $"Hello, {r_LoggedInUser.Name}";
+            this.labelUser.Text = $"Hello, {r_LoggedInUser.Name}"; 
+            labelLastSeen.Text = lastLoginTime == DateTime.MinValue 
+                ? "First time login\n" 
+                : $"Last logged in:\n {lastLoginTime.ToString("f")}";
         }
 
         private void populateUserPictureBox()
@@ -48,7 +49,17 @@ namespace BasicFacebookFeatures
             pictureBoxProfile.LoadAsync(r_LoggedInUser.PictureNormalURL);
         }
 
+        private void ClearNotifications()
+        {
+            listBoxNotifications.Items.Clear();
+        }
+
         private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            executeLogout();
+        }
+
+        private void executeLogout()
         {
             LogoutButtonClicked = true;
             FacebookService.Logout();
@@ -59,7 +70,7 @@ namespace BasicFacebookFeatures
         {
             if(m_FactGenerator == null)
             {
-                m_FactGenerator = new FactsGeneratorForm(r_LoggedInUser);
+                m_FactGenerator = new FormFactsGeneratorFeature(r_LoggedInUser);
             }
 
             m_FactGenerator.ShowDialog();
@@ -82,7 +93,15 @@ namespace BasicFacebookFeatures
 
         private void loadFriends()
         {
-            populateListBox(listBoxFriendsList, r_LoggedInUser.Friends, k_DisplayMemberName, k_NoFriendsMessage);
+            try
+            {
+                populateListBox(listBoxFriendsList, r_LoggedInUser.Friends, k_DisplayMemberName, k_NoFriendsMessage);
+                AddNotification("Successfully loaded friends.");
+            }
+            catch (Exception ex)
+            {
+                AddNotification($"Failed to load friends: {ex.Message}");
+            }
         }
 
         private void listBoxFriendsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -112,7 +131,15 @@ namespace BasicFacebookFeatures
 
         private void loadGroups()
         {
-            populateListBox(listBoxGroupsList, r_LoggedInUser.Groups, k_DisplayMemberName, k_NoGroupsMessage);
+            try
+            {
+                populateListBox(listBoxGroupsList, r_LoggedInUser.Groups, k_DisplayMemberName, k_NoGroupsMessage);
+                AddNotification("Successfully loaded groups.");
+            }
+            catch (Exception ex)
+            {
+                AddNotification($"Failed to load groups: {ex.Message}");
+            }
         }
 
         private void listBoxGroupsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -142,7 +169,15 @@ namespace BasicFacebookFeatures
 
         private void loadEvents()
         {
-            populateListBox(listBoxEventsList, r_LoggedInUser.Events, k_DisplayMemberName, k_NoEventsMessage);
+            try
+            {
+                populateListBox(listBoxEventsList, r_LoggedInUser.Events, k_DisplayMemberName, k_NoEventsMessage);
+                AddNotification("Successfully loaded events.");
+            }
+            catch (Exception ex)
+            {
+                AddNotification($"Failed to load events: {ex.Message}");
+            }
         }
 
         private void listBoxEventsList_SelectedIndexChanged(object sender, EventArgs e)
@@ -172,7 +207,15 @@ namespace BasicFacebookFeatures
 
         private void loadPosts()
         {
-            populateListBox(listBoxPosts, r_LoggedInUser.Posts, k_DisplayMemberMessage, k_NoPostsMessage);
+            try
+            {
+                populateListBox(listBoxPosts, r_LoggedInUser.Posts, k_DisplayMemberMessage, k_NoPostsMessage);
+                AddNotification("Successfully loaded posts.");
+            }
+            catch (Exception ex)
+            {
+                AddNotification($"Failed to load posts: {ex.Message}");
+            }
         }
 
         private void listBoxPosts_SelectedIndexChanged(object sender, EventArgs e)
@@ -205,19 +248,53 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void buttonGetInfo_Click(object sender, EventArgs e)
+        private void buttonGetInsights_Click(object sender, EventArgs e)
         {
-            populateInfoLabels();
+            buttonGetInsights.Enabled = false;
+            populateInsightsLabels();
+            AddNotification("Successfully loaded insights.");
+            buttonGetInsights.Enabled = true;
         }
 
-        private void populateInfoLabels()
+        private void populateInsightsLabels()
         {
-            this.labelName.Text = $"Your Name Is: {r_LoggedInUser.Name}";
-            this.labelBirthdayDate.Text = $"Your Birthday Date: {r_LoggedInUser.Birthday}";
-            this.labelNumberOfFriends.Text = $"You Have {r_LoggedInUser.Friends.Count} Friends";
-            this.labelGender.Text = $"Your Gender Is: {r_LoggedInUser.Gender.ToString()}";
-            this.labelNumOfPhotos.Text = $"You Have Uploaded {getNumberOfPhotos()} Photos";
-            this.labelNumberOfPosts.Text = $"You Have Made {r_LoggedInUser.Posts.Count.ToString()} Posts";
+            try
+            {
+                if (r_LoggedInUser.Posts?.Count > 0 && r_LoggedInUser.Posts[r_LoggedInUser.Posts.Count - 1].CreatedTime.HasValue)
+                {
+                    labelJoinedFacebook.Text = $"You joined Facebook on: {r_LoggedInUser.Posts[r_LoggedInUser.Posts.Count - 1].CreatedTime.Value.ToShortDateString()}";
+                }
+                else
+                {
+                    labelJoinedFacebook.Text = "Join date information unavailable.";
+                }
+
+                labelFirstFirend.Text = r_LoggedInUser.Friends?.Count > 0
+                    ? $"Your first friend on Facebook was: {r_LoggedInUser.Friends[0].Name}"
+                    : "No friends found.";
+
+                if (r_LoggedInUser.Posts?.Count > 0 && r_LoggedInUser.Posts[0].CreatedTime.HasValue)
+                {
+                    labelFirstPost.Text = $"You made your first post on: {r_LoggedInUser.Posts[0].CreatedTime.Value.ToShortDateString()}";
+                }
+                else
+                {
+                    labelFirstPost.Text = "No posts found.";
+                }
+
+                if (r_LoggedInUser.Checkins?.Count > 0 && r_LoggedInUser.Checkins[0].CreatedTime.HasValue)
+                {
+                    labelFirstCheckin.Text = $"You made your first check-in on: {r_LoggedInUser.Checkins[0].CreatedTime.Value.ToShortDateString()}";
+                }
+                else
+                {
+                    labelFirstCheckin.Text = "No check-ins found.";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching insights: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private int getNumberOfPhotos()
@@ -264,5 +341,18 @@ namespace BasicFacebookFeatures
                 MessageBox.Show(i_EmptyMessage);
             }
         }
+
+        private void AddNotification(string notificationMessage)
+        {
+            listBoxNotifications.Items.Add($"{DateTime.Now.ToShortTimeString()} - {notificationMessage}");
+
+            listBoxNotifications.SelectedIndex = listBoxNotifications.Items.Count - 1;
+
+            if (listBoxNotifications.Items.Count > 10) 
+            {
+                listBoxNotifications.Items.RemoveAt(0);
+            }
+        }
+
     }
 }

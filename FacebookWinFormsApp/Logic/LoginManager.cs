@@ -6,6 +6,7 @@ namespace BasicFacebookFeatures.Logic
     public class LoginManager 
     {
         public LoginResult LoginResult { get; private set; }
+
         public bool IsAccessTokenValid { get; set; }
 
         public AppSettings AppSettings { get; set; }
@@ -13,34 +14,16 @@ namespace BasicFacebookFeatures.Logic
         public LoginManager()
         {
             LoginResult = null;
-            AppSettings = null;
+            AppSettings = new AppSettings();
             IsAccessTokenValid = false;
         }
 
-        public bool LoginToFacebook()
+        public void SetLoginResult(LoginResult i_LoginResult)
         {
-            FacebookService.Logout();
-            return IsAccessTokenValid ? loginWithExistingToken() : loginWithNewToken();
+            LoginResult = i_LoginResult;
         }
 
-        private bool loginWithExistingToken()
-        {
-            LoginResult = (LoginResult.AccessToken != null)
-                ? FacebookService.Connect(LoginResult.AccessToken)
-                : null;
-
-            return !string.IsNullOrEmpty(LoginResult?.AccessToken)
-                ? true
-                : loginWithNewToken();
-        }
-
-
-        public void SetLoginResult(LoginResult loginResult)
-        {
-            LoginResult = loginResult;
-        }
-
-        public bool loginWithNewToken()
+        public bool LoginWithNewToken()
         {
             LoginResult = FacebookService.Login(
                 "3934700983518444",  // app's ID
@@ -62,10 +45,15 @@ namespace BasicFacebookFeatures.Logic
 
         public void SaveAppSettings(bool i_IsRememberMeChecked)
         {
+            if (AppSettings == null)
+            {
+                AppSettings = new AppSettings();
+            }
             AppSettings.RememberUser = i_IsRememberMeChecked;
-            AppSettings.LastAccessToken = i_IsRememberMeChecked ? LoginResult.AccessToken : null;
-
-            if (i_IsRememberMeChecked && !string.IsNullOrEmpty(LoginResult.AccessToken))
+            AppSettings.LastAccessToken = i_IsRememberMeChecked && LoginResult != null
+                                              ? LoginResult.AccessToken
+                                              : null;
+            if (i_IsRememberMeChecked && LoginResult != null && !string.IsNullOrEmpty(LoginResult.AccessToken))
             {
                 AppSettings.LastLoginTime = DateTime.Now;
             }
@@ -88,6 +76,7 @@ namespace BasicFacebookFeatures.Logic
                 LoginResult = FacebookService.Connect(AppSettings.LastAccessToken);
                 IsAccessTokenValid = !string.IsNullOrEmpty(LoginResult.AccessToken);
             }
+
             return IsAccessTokenValid;
         }
     }

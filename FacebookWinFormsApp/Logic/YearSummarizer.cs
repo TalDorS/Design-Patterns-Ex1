@@ -81,7 +81,6 @@ namespace BasicFacebookFeatures.Logic
 
         public Event GetPreviousEvent() => getPreviousItem(EventsListByYear, ref m_CurrentEventIndex);
 
-
         private T getNextItem<T>(List<T> i_List, ref int io_Index)
         {
             if (i_List == null || i_List.Count == 0 || io_Index >= i_List.Count - 1)

@@ -60,10 +60,10 @@ namespace BasicFacebookFeatures.Logic
             }
         }
 
-        private string getZodiacSign(DateTime birthday)
+        private string getZodiacSign(DateTime i_Birthday)
         {
-            int month = birthday.Month;
-            int day = birthday.Day;
+            int month = i_Birthday.Month;
+            int day = i_Birthday.Day;
             string zodiacSign = "Unknown";
 
             switch (month)
@@ -109,7 +109,7 @@ namespace BasicFacebookFeatures.Logic
             return zodiacSign;
         }
 
-        public string executeGenerator()
+        public string ExecuteGenerator()
         {
             string randomFact = string.Empty;
 
@@ -127,7 +127,6 @@ namespace BasicFacebookFeatures.Logic
 
         public string GenerateNextFact()
         {
-
             if (r_LoggedInUser == null)
             {
                 throw new InvalidOperationException("User is not logged in.");
@@ -140,7 +139,6 @@ namespace BasicFacebookFeatures.Logic
 
             FactType currentFact = m_Facts[m_FactIndex];
             string fact = string.Empty;
-
             switch (currentFact)
             {
                 case FactType.Friends:
@@ -150,11 +148,11 @@ namespace BasicFacebookFeatures.Logic
                     fact = r_LoggedInUser.Posts.Count > 0 ? $"You've made {r_LoggedInUser.Posts.Count} posts so far!" : "You haven't made any posts yet.";
                     break;
                 case FactType.Age:
-                    if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime io_birthday))
+                    if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime o_Birthday))
                     {
-                        int age = DateTime.Now.Year - io_birthday.Year;
+                        int age = DateTime.Now.Year - o_Birthday.Year;
 
-                        if (io_birthday.Date > DateTime.Now.AddYears(-age)) age--;
+                        if (o_Birthday.Date > DateTime.Now.AddYears(-age)) age--;
                         fact = $"You are {age} years old!";
                     }
                     break;
@@ -180,9 +178,10 @@ namespace BasicFacebookFeatures.Logic
                     fact = $"You are a member of {r_LoggedInUser.Groups.Count} groups.";
                     break;
                 case FactType.ZodiacSign: 
-                    if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime io_zodiacBirthday))
+                    if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime o_ZodiacBirthday))
                     {
-                        string zodiacSign = getZodiacSign(io_zodiacBirthday);
+                        string zodiacSign = getZodiacSign(o_ZodiacBirthday);
+
                         fact = $"Your zodiac sign is {zodiacSign}!";
                     }
                     else

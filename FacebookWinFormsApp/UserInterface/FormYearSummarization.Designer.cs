@@ -108,9 +108,9 @@ namespace BasicFacebookFeatures.UserInterface
             this.labelPhotos.AutoSize = true;
             this.labelPhotos.Location = new System.Drawing.Point(392, 353);
             this.labelPhotos.Name = "labelPhotos";
-            this.labelPhotos.Size = new System.Drawing.Size(45, 13);
+            this.labelPhotos.Size = new System.Drawing.Size(77, 13);
             this.labelPhotos.TabIndex = 5;
-            this.labelPhotos.Text = "Picutres";
+            this.labelPhotos.Text = "Profile Picutres";
             // 
             // buttonMoveToLeftProfilePhoto
             // 
@@ -301,14 +301,14 @@ namespace BasicFacebookFeatures.UserInterface
             this.tableLayoutPanelEvents.ColumnCount = 3;
             this.tableLayoutPanelEvents.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelEvents.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
-            this.tableLayoutPanelEvents.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanelEvents.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
             this.tableLayoutPanelEvents.Controls.Add(this.richTextBoxEventName, 0, 0);
             this.tableLayoutPanelEvents.Controls.Add(this.richTextBoxEventStartDate, 1, 0);
             this.tableLayoutPanelEvents.Controls.Add(this.richTextBoxEventEndDate, 2, 0);
             this.tableLayoutPanelEvents.Location = new System.Drawing.Point(283, 243);
             this.tableLayoutPanelEvents.Name = "tableLayoutPanelEvents";
             this.tableLayoutPanelEvents.RowCount = 1;
-            this.tableLayoutPanelEvents.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this.tableLayoutPanelEvents.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 91F));
             this.tableLayoutPanelEvents.Size = new System.Drawing.Size(396, 64);
             this.tableLayoutPanelEvents.TabIndex = 17;
             // 
@@ -319,7 +319,7 @@ namespace BasicFacebookFeatures.UserInterface
             this.richTextBoxEventName.Location = new System.Drawing.Point(6, 6);
             this.richTextBoxEventName.Name = "richTextBoxEventName";
             this.richTextBoxEventName.ReadOnly = true;
-            this.richTextBoxEventName.Size = new System.Drawing.Size(117, 55);
+            this.richTextBoxEventName.Size = new System.Drawing.Size(108, 55);
             this.richTextBoxEventName.TabIndex = 0;
             this.richTextBoxEventName.Text = "";
             // 
@@ -327,7 +327,7 @@ namespace BasicFacebookFeatures.UserInterface
             // 
             this.richTextBoxEventStartDate.BackColor = System.Drawing.Color.White;
             this.richTextBoxEventStartDate.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.richTextBoxEventStartDate.Location = new System.Drawing.Point(132, 6);
+            this.richTextBoxEventStartDate.Location = new System.Drawing.Point(123, 6);
             this.richTextBoxEventStartDate.Name = "richTextBoxEventStartDate";
             this.richTextBoxEventStartDate.ReadOnly = true;
             this.richTextBoxEventStartDate.Size = new System.Drawing.Size(135, 55);
@@ -338,7 +338,7 @@ namespace BasicFacebookFeatures.UserInterface
             // 
             this.richTextBoxEventEndDate.BackColor = System.Drawing.Color.White;
             this.richTextBoxEventEndDate.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.richTextBoxEventEndDate.Location = new System.Drawing.Point(276, 6);
+            this.richTextBoxEventEndDate.Location = new System.Drawing.Point(267, 6);
             this.richTextBoxEventEndDate.Name = "richTextBoxEventEndDate";
             this.richTextBoxEventEndDate.ReadOnly = true;
             this.richTextBoxEventEndDate.Size = new System.Drawing.Size(105, 55);

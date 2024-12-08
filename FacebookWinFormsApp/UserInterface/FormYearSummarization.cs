@@ -38,7 +38,7 @@ namespace BasicFacebookFeatures.UserInterface
 
         private void populateLabelsText()
         {
-            this.labelPhotos.Text = $"{m_YearSummarizer.CurrentYear}'s Photos, from oldest to newest:";
+            this.labelPhotos.Text = $"{m_YearSummarizer.CurrentYear}'s Profile Photos, from oldest to newest:";
             this.labelPosts.Text = $"{m_YearSummarizer.CurrentYear}'s Posts, from oldest to newest:";
             this.labelEvents.Text = $"{m_YearSummarizer.CurrentYear}'s Events, from oldest to newest:";
         }
@@ -172,8 +172,8 @@ namespace BasicFacebookFeatures.UserInterface
         private void summarizeYear()
         {
             int selectedYear = this.dateTimePicker1.Value.Year;
-            m_YearSummarizer.PopulateLists(selectedYear);
 
+            m_YearSummarizer.PopulateLists(selectedYear);
             updateUIForSummarizedYear();
         }
 

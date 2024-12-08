@@ -7,12 +7,15 @@ namespace BasicFacebookFeatures.Logic
 {
     public class AppSettings
     {
+        private const string k_AppSettingsPath = @".\AppSettings.xml";
+
         public bool RememberUser { get; set; }
+
         public DateTime LastLoginTime { get; set; } 
 
         public string LastAccessToken { get; set; }
 
-        private AppSettings()
+        public AppSettings()
         {
             RememberUser = false;
             LastAccessToken = null;
@@ -21,7 +24,8 @@ namespace BasicFacebookFeatures.Logic
 
         public void SaveToFile()
         {
-            string appSettingsPath = @".\AppSettings.xml";
+            string appSettingsPath = k_AppSettingsPath;
+
             try
             {
                 using (Stream stream = new FileStream(appSettingsPath, FileMode.Create))
@@ -38,11 +42,11 @@ namespace BasicFacebookFeatures.Logic
 
         public static AppSettings LoadFromFile()
         {
-            AppSettings appSettings = null;
+            AppSettings appSettings;
 
             try
             {
-                string appSettingsPath = @".\AppSettings.xml";
+                string appSettingsPath = k_AppSettingsPath;
 
                 using (Stream stream = new FileStream(appSettingsPath, FileMode.Open))
                 {

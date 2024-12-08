@@ -17,7 +17,7 @@ namespace BasicFacebookFeatures
         private const string k_NoEventsMessage = "No events available";
         private const string k_NoPostsMessage = "No posts available";
         private readonly User r_LoggedInUser;
-        private DateTime lastLoginTime;
+        private DateTime m_LastLoginTime;
         private FormFactsGeneratorFeature m_FactGenerator;
         private FormYearSummarization m_formYearSummarization;
 
@@ -29,7 +29,7 @@ namespace BasicFacebookFeatures
             FacebookWrapper.FacebookService.s_CollectionLimit = 25; 
             r_LoggedInUser = i_LoggedInUser;
             AppSettings appSettings = AppSettings.LoadFromFile();
-            lastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
+            m_LastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
 
             ClearNotifications();
             populateLabels();
@@ -39,9 +39,9 @@ namespace BasicFacebookFeatures
         private void populateLabels()
         {
             this.labelUser.Text = $"Hello, {r_LoggedInUser.Name}"; 
-            labelLastSeen.Text = lastLoginTime == DateTime.MinValue 
+            labelLastSeen.Text = m_LastLoginTime == DateTime.MinValue 
                 ? "First time login\n" 
-                : $"Last logged in:\n {lastLoginTime.ToString("f")}";
+                : $"Last logged in:\n {m_LastLoginTime.ToString("f")}";
         }
 
         private void populateUserPictureBox()
@@ -62,7 +62,17 @@ namespace BasicFacebookFeatures
         private void executeLogout()
         {
             LogoutButtonClicked = true;
+            AppSettings appSettings = AppSettings.LoadFromFile();
+
+            appSettings.RememberUser = false;
+            appSettings.LastAccessToken = null;
+            appSettings.SaveToFile();
             FacebookService.Logout();
+            this.Hide();
+            using (FormLogin formLogin = new FormLogin())
+            {
+                formLogin.ShowDialog();
+            }
             this.Close();
         }
 
@@ -96,11 +106,11 @@ namespace BasicFacebookFeatures
             try
             {
                 populateListBox(listBoxFriendsList, r_LoggedInUser.Friends, k_DisplayMemberName, k_NoFriendsMessage);
-                AddNotification("Successfully loaded friends.");
+                addNotification("Successfully loaded friends.");
             }
             catch (Exception ex)
             {
-                AddNotification($"Failed to load friends: {ex.Message}");
+                addNotification($"Failed to load friends: {ex.Message}");
             }
         }
 
@@ -134,11 +144,11 @@ namespace BasicFacebookFeatures
             try
             {
                 populateListBox(listBoxGroupsList, r_LoggedInUser.Groups, k_DisplayMemberName, k_NoGroupsMessage);
-                AddNotification("Successfully loaded groups.");
+                addNotification("Successfully loaded groups.");
             }
             catch (Exception ex)
             {
-                AddNotification($"Failed to load groups: {ex.Message}");
+                addNotification($"Failed to load groups: {ex.Message}");
             }
         }
 
@@ -172,11 +182,11 @@ namespace BasicFacebookFeatures
             try
             {
                 populateListBox(listBoxEventsList, r_LoggedInUser.Events, k_DisplayMemberName, k_NoEventsMessage);
-                AddNotification("Successfully loaded events.");
+                addNotification("Successfully loaded events.");
             }
             catch (Exception ex)
             {
-                AddNotification($"Failed to load events: {ex.Message}");
+                addNotification($"Failed to load events: {ex.Message}");
             }
         }
 
@@ -210,11 +220,11 @@ namespace BasicFacebookFeatures
             try
             {
                 populateListBox(listBoxPosts, r_LoggedInUser.Posts, k_DisplayMemberMessage, k_NoPostsMessage);
-                AddNotification("Successfully loaded posts.");
+                addNotification("Successfully loaded posts.");
             }
             catch (Exception ex)
             {
-                AddNotification($"Failed to load posts: {ex.Message}");
+                addNotification($"Failed to load posts: {ex.Message}");
             }
         }
 
@@ -252,7 +262,7 @@ namespace BasicFacebookFeatures
         {
             buttonGetInsights.Enabled = false;
             populateInsightsLabels();
-            AddNotification("Successfully loaded insights.");
+            addNotification("Successfully loaded insights.");
             buttonGetInsights.Enabled = true;
         }
 
@@ -342,12 +352,10 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void AddNotification(string notificationMessage)
+        private void addNotification(string i_NotificationMessage)
         {
-            listBoxNotifications.Items.Add($"{DateTime.Now.ToShortTimeString()} - {notificationMessage}");
-
+            listBoxNotifications.Items.Add($"{DateTime.Now.ToShortTimeString()} - {i_NotificationMessage}");
             listBoxNotifications.SelectedIndex = listBoxNotifications.Items.Count - 1;
-
             if (listBoxNotifications.Items.Count > 10) 
             {
                 listBoxNotifications.Items.RemoveAt(0);

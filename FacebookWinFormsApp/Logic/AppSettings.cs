@@ -15,6 +15,8 @@ namespace BasicFacebookFeatures.Logic
 
         public string LastAccessToken { get; set; }
 
+        public string LastUserId { get; set; }
+
         public AppSettings()
         {
             RememberUser = false;

@@ -29,8 +29,17 @@ namespace BasicFacebookFeatures
             FacebookWrapper.FacebookService.s_CollectionLimit = 25; 
             r_LoggedInUser = i_LoggedInUser;
             AppSettings appSettings = AppSettings.LoadFromFile();
-            m_LastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
-
+            if (appSettings.LastUserId != r_LoggedInUser.Id)
+            {
+                // This is a new user or different user
+                m_LastLoginTime = DateTime.MinValue; // Treat it as a new user (first time login)
+                appSettings.LastUserId = r_LoggedInUser.Id; // Save the new user ID
+            }
+            else
+            {
+                // This is the same user as the previous session
+                m_LastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
+            }
             ClearNotifications();
             populateLabels();
             populateUserPictureBox();
@@ -38,10 +47,24 @@ namespace BasicFacebookFeatures
 
         private void populateLabels()
         {
-            this.labelUser.Text = $"Hello, {r_LoggedInUser.Name}"; 
-            labelLastSeen.Text = m_LastLoginTime == DateTime.MinValue 
-                ? "First time login\n" 
-                : $"Last logged in:\n {m_LastLoginTime.ToString("f")}";
+            AppSettings appSettings = AppSettings.LoadFromFile();
+
+            this.labelUser.Text = $"Hello, {r_LoggedInUser.Name}";
+
+            if (appSettings.LastUserId == r_LoggedInUser.Id)
+            {
+                labelLastSeen.Text = appSettings.LastLoginTime == DateTime.MinValue
+                    ? "First time login\n"
+                    : $"Last logged in:\n {appSettings.LastLoginTime.ToString("f")}";
+            }
+            else
+            {
+                labelLastSeen.Text = "New user, welcome!";
+            }
+
+            appSettings.LastLoginTime = DateTime.Now;
+            appSettings.LastUserId = r_LoggedInUser.Id;
+            appSettings.SaveToFile();
         }
 
         private void populateUserPictureBox()
@@ -66,6 +89,7 @@ namespace BasicFacebookFeatures
 
             appSettings.RememberUser = false;
             appSettings.LastAccessToken = null;
+            appSettings.LastUserId = null; 
             appSettings.SaveToFile();
             FacebookService.Logout();
             this.Hide();

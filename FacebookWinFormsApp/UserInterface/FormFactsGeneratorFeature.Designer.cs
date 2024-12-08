@@ -62,7 +62,7 @@ namespace BasicFacebookFeatures.UserInterface
             this.buttonNextFact.AutoSize = true;
             this.buttonNextFact.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.buttonNextFact.Location = new System.Drawing.Point(466, 389);
-            this.buttonNextFact.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonNextFact.Margin = new System.Windows.Forms.Padding(2);
             this.buttonNextFact.Name = "buttonNextFact";
             this.buttonNextFact.Size = new System.Drawing.Size(146, 44);
             this.buttonNextFact.TabIndex = 1;
@@ -120,7 +120,7 @@ namespace BasicFacebookFeatures.UserInterface
             // pictureBoxFacts
             // 
             this.pictureBoxFacts.Location = new System.Drawing.Point(133, 180);
-            this.pictureBoxFacts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBoxFacts.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBoxFacts.Name = "pictureBoxFacts";
             this.pictureBoxFacts.Size = new System.Drawing.Size(359, 203);
             this.pictureBoxFacts.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -133,7 +133,7 @@ namespace BasicFacebookFeatures.UserInterface
             this.buttonShareFact.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonShareFact.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonShareFact.Location = new System.Drawing.Point(6, 379);
-            this.buttonShareFact.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonShareFact.Margin = new System.Windows.Forms.Padding(2);
             this.buttonShareFact.Name = "buttonShareFact";
             this.buttonShareFact.Size = new System.Drawing.Size(85, 48);
             this.buttonShareFact.TabIndex = 17;
@@ -153,11 +153,11 @@ namespace BasicFacebookFeatures.UserInterface
             this.Controls.Add(this.lblFact);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormFactsGeneratorFeature";
-            this.Text = "FactForm";
+            this.Text = "Fact Generator";
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFacebook)).EndInit();

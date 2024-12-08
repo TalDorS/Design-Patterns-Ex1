@@ -1,5 +1,4 @@
-﻿
-namespace BasicFacebookFeatures.Enums
+﻿namespace BasicFacebookFeatures.Enums
 {
     public enum eFactType
     {

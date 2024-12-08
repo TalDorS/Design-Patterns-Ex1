@@ -4,18 +4,19 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using BasicFacebookFeatures.Enums;
 
+
 namespace BasicFacebookFeatures.Logic
 {
     public class FactsGenerator
     {
         private readonly User r_LoggedInUser;
-        private readonly List<eFactType> m_Facts;
+        private readonly List<eFactType> r_Facts;
         private int m_FactIndex;
 
         public FactsGenerator(User i_LoggedInUser)
         {
             r_LoggedInUser = i_LoggedInUser ?? throw new ArgumentNullException(nameof(i_LoggedInUser));
-            m_Facts = new List<eFactType>
+            r_Facts = new List<eFactType>
             {
                 eFactType.Friends,
                 eFactType.Posts,
@@ -29,7 +30,6 @@ namespace BasicFacebookFeatures.Logic
                 eFactType.Groups,
                 eFactType.ZodiacSign
             };
-
             m_FactIndex = 0;
         }
 
@@ -37,52 +37,52 @@ namespace BasicFacebookFeatures.Logic
         {
             get
             {
-                return m_Facts[m_FactIndex == 0 ? m_Facts.Count - 1 : m_FactIndex - 1];
+                return r_Facts[m_FactIndex == 0 ? r_Facts.Count - 1 : m_FactIndex - 1];
             }
         }
 
         private eZodiacSign getZodiacSign(DateTime i_Birthdate)
         {
-            int month = i_Birthdate.Month;
             int day = i_Birthdate.Day;
             eZodiacSign zodiacSign = eZodiacSign.Unknown;
+            eMonths month = (eMonths)i_Birthdate.Month;
 
             switch (month)
             {
-                case 1:
+                case eMonths.January:
                     zodiacSign = day <= 19 ? eZodiacSign.Capricorn : eZodiacSign.Aquarius;
                     break;
-                case 2:
+                case eMonths.February:
                     zodiacSign = day <= 18 ? eZodiacSign.Aquarius : eZodiacSign.Pisces;
                     break;
-                case 3:
+                case eMonths.March:
                     zodiacSign = day <= 20 ? eZodiacSign.Pisces : eZodiacSign.Aries;
                     break;
-                case 4:
+                case eMonths.April:
                     zodiacSign = day <= 19 ? eZodiacSign.Aries : eZodiacSign.Taurus;
                     break;
-                case 5:
+                case eMonths.May:
                     zodiacSign = day <= 20 ? eZodiacSign.Taurus : eZodiacSign.Gemini;
                     break;
-                case 6:
+                case eMonths.June:
                     zodiacSign = day <= 20 ? eZodiacSign.Gemini : eZodiacSign.Cancer;
                     break;
-                case 7:
+                case eMonths.July:
                     zodiacSign = day <= 22 ? eZodiacSign.Cancer : eZodiacSign.Leo;
                     break;
-                case 8:
+                case eMonths.August:
                     zodiacSign = day <= 22 ? eZodiacSign.Leo : eZodiacSign.Virgo;
                     break;
-                case 9:
+                case eMonths.September:
                     zodiacSign = day <= 22 ? eZodiacSign.Virgo : eZodiacSign.Libra;
                     break;
-                case 10:
+                case eMonths.October:
                     zodiacSign = day <= 22 ? eZodiacSign.Libra : eZodiacSign.Scorpio;
                     break;
-                case 11:
+                case eMonths.November:
                     zodiacSign = day <= 21 ? eZodiacSign.Scorpio : eZodiacSign.Sagittarius;
                     break;
-                case 12:
+                case eMonths.December:
                     zodiacSign = day <= 21 ? eZodiacSign.Sagittarius : eZodiacSign.Capricorn;
                     break;
             }
@@ -97,12 +97,12 @@ namespace BasicFacebookFeatures.Logic
                 throw new InvalidOperationException("User is not logged in.");
             }
 
-            if (m_FactIndex >= m_Facts.Count)
+            if (m_FactIndex >= r_Facts.Count)
             {
                 m_FactIndex = 0;
             }
 
-            eFactType currentFact = m_Facts[m_FactIndex];
+            eFactType currentFact = r_Facts[m_FactIndex];
             string fact = getFact(currentFact);
 
             m_FactIndex++;
@@ -110,11 +110,11 @@ namespace BasicFacebookFeatures.Logic
             return fact;
         }
 
-        private string getFact(eFactType io_CurrentFact)
+        private string getFact(eFactType i_CurrentFact)
         {
             string fact = string.Empty;
 
-            switch (io_CurrentFact)
+            switch (i_CurrentFact)
             {
                 case eFactType.Friends:
                     fact = generateFriendsFact();

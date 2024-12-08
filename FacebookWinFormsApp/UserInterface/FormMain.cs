@@ -19,7 +19,7 @@ namespace BasicFacebookFeatures
         private readonly User r_LoggedInUser;
         private DateTime m_LastLoginTime;
         private FormFactsGeneratorFeature m_FactGenerator;
-        private FormYearSummarization m_formYearSummarization;
+        private FormYearSummarization m_FormYearSummarization;
 
         public bool LogoutButtonClicked { get; private set; }
 
@@ -29,6 +29,7 @@ namespace BasicFacebookFeatures
             FacebookWrapper.FacebookService.s_CollectionLimit = 25; 
             r_LoggedInUser = i_LoggedInUser;
             AppSettings appSettings = AppSettings.LoadFromFile();
+
             if (appSettings.LastUserId != r_LoggedInUser.Id)
             {
                 m_LastLoginTime = DateTime.MinValue; 
@@ -38,6 +39,7 @@ namespace BasicFacebookFeatures
             {
                 m_LastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
             }
+
             clearNotifications();
             populateLabels();
             populateUserPictureBox();
@@ -48,7 +50,6 @@ namespace BasicFacebookFeatures
             AppSettings appSettings = AppSettings.LoadFromFile();
 
             this.labelUser.Text = $"Hello, {r_LoggedInUser.Name}";
-
             if (appSettings.LastUserId == r_LoggedInUser.Id)
             {
                 labelLastSeen.Text = appSettings.LastLoginTime == DateTime.MinValue
@@ -110,12 +111,12 @@ namespace BasicFacebookFeatures
 
         private void buttonYearSummary_Click(object sender, EventArgs e)
         {
-            if(m_formYearSummarization == null)
+            if(m_FormYearSummarization == null)
             {
-                m_formYearSummarization = new FormYearSummarization(r_LoggedInUser);
+                m_FormYearSummarization = new FormYearSummarization(r_LoggedInUser);
             }
 
-            m_formYearSummarization.ShowDialog();
+            m_FormYearSummarization.ShowDialog();
         }
 
         private void buttonViewFriends_Click(object sender, EventArgs e)
@@ -327,28 +328,6 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show($"Error fetching insights: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private int getNumberOfPhotos()
-        {
-            int totalPhotos = 0;
-
-            try
-            {
-                foreach (Album album in r_LoggedInUser.Albums)
-                {
-                    if (album.Photos != null)
-                    {
-                        totalPhotos += album.Photos.Count;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to calculate the number of photos: {ex.Message}");
-            }
-
-            return totalPhotos;
         }
 
         private void populateListBox<T>(ListBox i_ListBox, IEnumerable<T> i_Items, string i_DisplayMember, string i_EmptyMessage)

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.buttonLoginAsNewUser = new System.Windows.Forms.Button();
             this.checkBoxRememberMe = new System.Windows.Forms.CheckBox();
             this.LoginPhoto = new System.Windows.Forms.PictureBox();
@@ -100,6 +101,7 @@
             this.Controls.Add(this.checkBoxRememberMe);
             this.Controls.Add(this.buttonLoginAsNewUser);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

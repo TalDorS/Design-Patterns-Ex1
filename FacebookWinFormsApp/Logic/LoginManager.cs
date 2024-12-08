@@ -49,6 +49,7 @@ namespace BasicFacebookFeatures.Logic
             {
                 AppSettings = new AppSettings();
             }
+
             AppSettings.RememberUser = i_IsRememberMeChecked;
             AppSettings.LastAccessToken = i_IsRememberMeChecked && LoginResult != null
                                               ? LoginResult.AccessToken

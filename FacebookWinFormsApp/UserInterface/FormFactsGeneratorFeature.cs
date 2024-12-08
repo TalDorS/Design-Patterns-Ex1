@@ -10,8 +10,8 @@ namespace BasicFacebookFeatures.UserInterface
 {
     public partial class FormFactsGeneratorFeature : Form
     {
-        private const int MinFontSize = 13;
-        private const int MaxFontSize = 29;
+        private const int k_MinFontSize = 13;
+        private const int k_MaxFontSize = 29;
         private readonly User r_LoggedInUser;
         private FactsGenerator m_FactGenerator;
         private readonly Random r_Random;
@@ -50,7 +50,7 @@ namespace BasicFacebookFeatures.UserInterface
         private void applyRandomFontAndSize()
         {
             string[] fontFamilies = { "Arial", "Comic Sans MS", "Verdana", "Tahoma", "Times New Roman" };
-            int fontSize = r_Random.Next(MinFontSize, MaxFontSize);
+            int fontSize = r_Random.Next(k_MinFontSize, k_MaxFontSize);
             string fontFamily = fontFamilies[r_Random.Next(fontFamilies.Length)];
 
             lblFact.Font = new Font(fontFamily, fontSize, FontStyle.Bold);

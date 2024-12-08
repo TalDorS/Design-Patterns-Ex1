@@ -30,6 +30,7 @@ namespace BasicFacebookFeatures
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonLogout = new System.Windows.Forms.Button();
             this.buttonYearSummary = new System.Windows.Forms.Button();
             this.buttonGenerateFacts = new System.Windows.Forms.Button();
@@ -145,7 +146,7 @@ namespace BasicFacebookFeatures
             this.labelUser.ForeColor = System.Drawing.Color.White;
             this.labelUser.Location = new System.Drawing.Point(85, 38);
             this.labelUser.Name = "labelUser";
-            this.labelUser.Size = new System.Drawing.Size(73, 28);
+            this.labelUser.Size = new System.Drawing.Size(59, 21);
             this.labelUser.TabIndex = 63;
             this.labelUser.Text = "Hello, ";
             // 
@@ -156,7 +157,7 @@ namespace BasicFacebookFeatures
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(706, 53);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(230, 19);
+            this.label1.Size = new System.Drawing.Size(188, 13);
             this.label1.TabIndex = 15;
             this.label1.Text = "Made By Adva Levine and Tal Dor ©";
             // 
@@ -219,10 +220,10 @@ namespace BasicFacebookFeatures
             // 
             this.listBoxFriendsList.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxFriendsList.FormattingEnabled = true;
-            this.listBoxFriendsList.ItemHeight = 25;
+            this.listBoxFriendsList.ItemHeight = 20;
             this.listBoxFriendsList.Location = new System.Drawing.Point(6, 26);
             this.listBoxFriendsList.Name = "listBoxFriendsList";
-            this.listBoxFriendsList.Size = new System.Drawing.Size(182, 79);
+            this.listBoxFriendsList.Size = new System.Drawing.Size(182, 64);
             this.listBoxFriendsList.TabIndex = 71;
             this.listBoxFriendsList.SelectedIndexChanged += new System.EventHandler(this.listBoxFriendsList_SelectedIndexChanged);
             // 
@@ -279,10 +280,10 @@ namespace BasicFacebookFeatures
             // 
             this.listBoxGroupsList.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxGroupsList.FormattingEnabled = true;
-            this.listBoxGroupsList.ItemHeight = 25;
+            this.listBoxGroupsList.ItemHeight = 20;
             this.listBoxGroupsList.Location = new System.Drawing.Point(6, 26);
             this.listBoxGroupsList.Name = "listBoxGroupsList";
-            this.listBoxGroupsList.Size = new System.Drawing.Size(182, 79);
+            this.listBoxGroupsList.Size = new System.Drawing.Size(182, 64);
             this.listBoxGroupsList.TabIndex = 71;
             this.listBoxGroupsList.SelectedIndexChanged += new System.EventHandler(this.listBoxGroupsList_SelectedIndexChanged);
             // 
@@ -326,10 +327,10 @@ namespace BasicFacebookFeatures
             // 
             this.listBoxEventsList.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxEventsList.FormattingEnabled = true;
-            this.listBoxEventsList.ItemHeight = 25;
+            this.listBoxEventsList.ItemHeight = 20;
             this.listBoxEventsList.Location = new System.Drawing.Point(6, 24);
             this.listBoxEventsList.Name = "listBoxEventsList";
-            this.listBoxEventsList.Size = new System.Drawing.Size(182, 79);
+            this.listBoxEventsList.Size = new System.Drawing.Size(182, 64);
             this.listBoxEventsList.TabIndex = 71;
             this.listBoxEventsList.SelectedIndexChanged += new System.EventHandler(this.listBoxEventsList_SelectedIndexChanged);
             // 
@@ -367,7 +368,7 @@ namespace BasicFacebookFeatures
             // 
             this.listBoxPostComments.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxPostComments.FormattingEnabled = true;
-            this.listBoxPostComments.ItemHeight = 25;
+            this.listBoxPostComments.ItemHeight = 20;
             this.listBoxPostComments.Location = new System.Drawing.Point(272, 31);
             this.listBoxPostComments.Name = "listBoxPostComments";
             this.listBoxPostComments.Size = new System.Drawing.Size(288, 104);
@@ -377,7 +378,7 @@ namespace BasicFacebookFeatures
             // 
             this.listBoxPosts.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxPosts.FormattingEnabled = true;
-            this.listBoxPosts.ItemHeight = 25;
+            this.listBoxPosts.ItemHeight = 20;
             this.listBoxPosts.Location = new System.Drawing.Point(6, 31);
             this.listBoxPosts.Name = "listBoxPosts";
             this.listBoxPosts.Size = new System.Drawing.Size(260, 104);
@@ -404,7 +405,7 @@ namespace BasicFacebookFeatures
             this.labelJoinedFacebook.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelJoinedFacebook.Location = new System.Drawing.Point(7, 33);
             this.labelJoinedFacebook.Name = "labelJoinedFacebook";
-            this.labelJoinedFacebook.Size = new System.Drawing.Size(200, 23);
+            this.labelJoinedFacebook.Size = new System.Drawing.Size(162, 19);
             this.labelJoinedFacebook.TabIndex = 77;
             this.labelJoinedFacebook.Text = "You joined Facebook on: ";
             // 
@@ -415,7 +416,7 @@ namespace BasicFacebookFeatures
             this.labelFirstFirend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelFirstFirend.Location = new System.Drawing.Point(7, 59);
             this.labelFirstFirend.Name = "labelFirstFirend";
-            this.labelFirstFirend.Size = new System.Drawing.Size(264, 23);
+            this.labelFirstFirend.Size = new System.Drawing.Size(215, 19);
             this.labelFirstFirend.TabIndex = 78;
             this.labelFirstFirend.Text = "Your first friend on Facebook was:";
             // 
@@ -426,7 +427,7 @@ namespace BasicFacebookFeatures
             this.labelFirstPost.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelFirstPost.Location = new System.Drawing.Point(6, 87);
             this.labelFirstPost.Name = "labelFirstPost";
-            this.labelFirstPost.Size = new System.Drawing.Size(230, 23);
+            this.labelFirstPost.Size = new System.Drawing.Size(187, 19);
             this.labelFirstPost.TabIndex = 79;
             this.labelFirstPost.Text = "You made your first post on: ";
             // 
@@ -452,7 +453,7 @@ namespace BasicFacebookFeatures
             this.labelFirstCheckin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelFirstCheckin.Location = new System.Drawing.Point(6, 116);
             this.labelFirstCheckin.Name = "labelFirstCheckin";
-            this.labelFirstCheckin.Size = new System.Drawing.Size(208, 23);
+            this.labelFirstCheckin.Size = new System.Drawing.Size(169, 19);
             this.labelFirstCheckin.TabIndex = 80;
             this.labelFirstCheckin.Text = "Your first check-in was at: ";
             // 
@@ -488,7 +489,7 @@ namespace BasicFacebookFeatures
             this.labelLastSeen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelLastSeen.Location = new System.Drawing.Point(7, 33);
             this.labelLastSeen.Name = "labelLastSeen";
-            this.labelLastSeen.Size = new System.Drawing.Size(69, 20);
+            this.labelLastSeen.Size = new System.Drawing.Size(55, 15);
             this.labelLastSeen.TabIndex = 77;
             this.labelLastSeen.Text = "Last seen";
             // 
@@ -507,15 +508,15 @@ namespace BasicFacebookFeatures
             // listBoxNotifications
             // 
             this.listBoxNotifications.FormattingEnabled = true;
-            this.listBoxNotifications.ItemHeight = 22;
+            this.listBoxNotifications.ItemHeight = 18;
             this.listBoxNotifications.Location = new System.Drawing.Point(11, 34);
             this.listBoxNotifications.Name = "listBoxNotifications";
-            this.listBoxNotifications.Size = new System.Drawing.Size(252, 92);
+            this.listBoxNotifications.Size = new System.Drawing.Size(252, 76);
             this.listBoxNotifications.TabIndex = 0;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(950, 578);
@@ -530,6 +531,7 @@ namespace BasicFacebookFeatures
             this.Controls.Add(this.panelHeader);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

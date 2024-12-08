@@ -12,14 +12,14 @@ namespace BasicFacebookFeatures.UserInterface
 
         private readonly User r_LoggedInUser;
         private FactsGenerator m_FactGenerator;
-        private readonly Random m_Random;
+        private readonly Random r_Random;
 
         public FormFactsGeneratorFeature(User i_LoggedInUser)
         {
             InitializeComponent();
             r_LoggedInUser = i_LoggedInUser;
             m_FactGenerator = new FactsGenerator(r_LoggedInUser);
-            m_Random = new Random();
+            r_Random = new Random();
             DisplayNextFact();
         }
 
@@ -27,13 +27,13 @@ namespace BasicFacebookFeatures.UserInterface
         {
             buttonNextFact.Enabled = false;
             string fact = m_FactGenerator.GenerateNextFact();
+
             lblFact.Text = fact;
             setImageForFact(m_FactGenerator.CurrentFact);
             applyRandomFontAndSize();
             applyRandomColor();
             centerLabel();
             this.Invalidate();
-
             Task.Delay(300).ContinueWith(t =>
             {
                 buttonNextFact.Invoke((MethodInvoker)(() => buttonNextFact.Enabled = true));
@@ -48,8 +48,8 @@ namespace BasicFacebookFeatures.UserInterface
         private void applyRandomFontAndSize()
         {
             string[] fontFamilies = { "Arial", "Comic Sans MS", "Verdana", "Tahoma", "Times New Roman" };
-            int fontSize = m_Random.Next(13, 29); // Random font size between 13 and 28
-            string fontFamily = fontFamilies[m_Random.Next(fontFamilies.Length)];
+            int fontSize = r_Random.Next(13, 29); // Random font size between 13 and 28
+            string fontFamily = fontFamilies[r_Random.Next(fontFamilies.Length)];
 
             lblFact.Font = new Font(fontFamily, fontSize, FontStyle.Bold);
             lblFact.Width = this.ClientSize.Width - 40; 
@@ -57,9 +57,10 @@ namespace BasicFacebookFeatures.UserInterface
             lblFact.AutoSize = false;
             lblFact.TextAlign = ContentAlignment.TopCenter;
         }
-        private void setImageForFact(FactsGenerator.FactType factType)
+
+        private void setImageForFact(FactsGenerator.FactType i_FactType)
         {
-            switch (factType)
+            switch (i_FactType)
             {
                 case FactsGenerator.FactType.Friends:
                     pictureBoxFacts.Image = Properties.Resources.FriendsImage; 
@@ -131,7 +132,7 @@ namespace BasicFacebookFeatures.UserInterface
                 Color.Pink
             };
 
-            lblFact.ForeColor = colors[m_Random.Next(colors.Length)];
+            lblFact.ForeColor = colors[r_Random.Next(colors.Length)];
         }
         private void centerLabel()
         {
@@ -150,6 +151,7 @@ namespace BasicFacebookFeatures.UserInterface
         private void executeShareFact()
         {
             string factToShare = lblFact.Text;
+
             Clipboard.SetText(factToShare); 
             MessageBox.Show("Fact copied to clipboard! Share it with your friends!");
         }

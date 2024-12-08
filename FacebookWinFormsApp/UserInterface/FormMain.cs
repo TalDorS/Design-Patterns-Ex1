@@ -70,7 +70,7 @@ namespace BasicFacebookFeatures
             pictureBoxProfile.LoadAsync(r_LoggedInUser.PictureNormalURL);
         }
 
-        private void ClearNotifications()
+        private void clearNotifications()
         {
             listBoxNotifications.Items.Clear();
         }

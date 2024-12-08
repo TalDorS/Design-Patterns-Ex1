@@ -38,7 +38,7 @@ namespace BasicFacebookFeatures
             {
                 m_LastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
             }
-            ClearNotifications();
+            clearNotifications();
             populateLabels();
             populateUserPictureBox();
         }

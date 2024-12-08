@@ -31,13 +31,11 @@ namespace BasicFacebookFeatures
             AppSettings appSettings = AppSettings.LoadFromFile();
             if (appSettings.LastUserId != r_LoggedInUser.Id)
             {
-                // This is a new user or different user
-                m_LastLoginTime = DateTime.MinValue; // Treat it as a new user (first time login)
-                appSettings.LastUserId = r_LoggedInUser.Id; // Save the new user ID
+                m_LastLoginTime = DateTime.MinValue; 
+                appSettings.LastUserId = r_LoggedInUser.Id;
             }
             else
             {
-                // This is the same user as the previous session
                 m_LastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
             }
             ClearNotifications();
@@ -385,6 +383,5 @@ namespace BasicFacebookFeatures
                 listBoxNotifications.Items.RemoveAt(0);
             }
         }
-
     }
 }

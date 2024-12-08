@@ -1,7 +1,6 @@
 ﻿using BasicFacebookFeatures.Logic;
 using FacebookWrapper;
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace BasicFacebookFeatures.UserInterface

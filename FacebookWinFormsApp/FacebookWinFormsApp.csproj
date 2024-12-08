@@ -77,6 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\eFactType.cs" />
+    <Compile Include="Enums\eZodiacSign.cs" />
     <Compile Include="Logic\AppSettings.cs" />
     <Compile Include="Logic\LoginManager.cs" />
     <Compile Include="Logic\FactsGenerator.cs" />

@@ -29,19 +29,40 @@ namespace BasicFacebookFeatures
             FacebookWrapper.FacebookService.s_CollectionLimit = 25; 
             r_LoggedInUser = i_LoggedInUser;
             AppSettings appSettings = AppSettings.LoadFromFile();
-            m_LastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
-
-            ClearNotifications();
+            if (appSettings.LastUserId != r_LoggedInUser.Id)
+            {
+                m_LastLoginTime = DateTime.MinValue; 
+                appSettings.LastUserId = r_LoggedInUser.Id;
+            }
+            else
+            {
+                m_LastLoginTime = appSettings.LastLoginTime == DateTime.MinValue ? DateTime.Now : appSettings.LastLoginTime;
+            }
+            clearNotifications();
             populateLabels();
             populateUserPictureBox();
         }
 
         private void populateLabels()
         {
-            this.labelUser.Text = $"Hello, {r_LoggedInUser.Name}"; 
-            labelLastSeen.Text = m_LastLoginTime == DateTime.MinValue 
-                ? "First time login\n" 
-                : $"Last logged in:\n {m_LastLoginTime.ToString("f")}";
+            AppSettings appSettings = AppSettings.LoadFromFile();
+
+            this.labelUser.Text = $"Hello, {r_LoggedInUser.Name}";
+
+            if (appSettings.LastUserId == r_LoggedInUser.Id)
+            {
+                labelLastSeen.Text = appSettings.LastLoginTime == DateTime.MinValue
+                    ? "First time login\n"
+                    : $"Last logged in:\n {appSettings.LastLoginTime.ToString("f")}";
+            }
+            else
+            {
+                labelLastSeen.Text = "New user, welcome!";
+            }
+
+            appSettings.LastLoginTime = DateTime.Now;
+            appSettings.LastUserId = r_LoggedInUser.Id;
+            appSettings.SaveToFile();
         }
 
         private void populateUserPictureBox()
@@ -49,7 +70,7 @@ namespace BasicFacebookFeatures
             pictureBoxProfile.LoadAsync(r_LoggedInUser.PictureNormalURL);
         }
 
-        private void ClearNotifications()
+        private void clearNotifications()
         {
             listBoxNotifications.Items.Clear();
         }
@@ -66,6 +87,7 @@ namespace BasicFacebookFeatures
 
             appSettings.RememberUser = false;
             appSettings.LastAccessToken = null;
+            appSettings.LastUserId = null; 
             appSettings.SaveToFile();
             FacebookService.Logout();
             this.Hide();
@@ -361,6 +383,5 @@ namespace BasicFacebookFeatures
                 listBoxNotifications.Items.RemoveAt(0);
             }
         }
-
     }
 }

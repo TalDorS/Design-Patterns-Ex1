@@ -4,12 +4,14 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BasicFacebookFeatures.Enums;
 
 namespace BasicFacebookFeatures.UserInterface
 {
     public partial class FormFactsGeneratorFeature : Form
     {
-
+        private const int MinFontSize = 13;
+        private const int MaxFontSize = 29;
         private readonly User r_LoggedInUser;
         private FactsGenerator m_FactGenerator;
         private readonly Random r_Random;
@@ -20,14 +22,14 @@ namespace BasicFacebookFeatures.UserInterface
             r_LoggedInUser = i_LoggedInUser;
             m_FactGenerator = new FactsGenerator(r_LoggedInUser);
             r_Random = new Random();
-            DisplayNextFact();
+            displayNextFact();
         }
 
-        private void DisplayNextFact()
+        private void displayNextFact()
         {
-            buttonNextFact.Enabled = false;
             string fact = m_FactGenerator.GenerateNextFact();
 
+            buttonNextFact.Enabled = false;
             lblFact.Text = fact;
             setImageForFact(m_FactGenerator.CurrentFact);
             applyRandomFontAndSize();
@@ -42,13 +44,13 @@ namespace BasicFacebookFeatures.UserInterface
 
         private void buttonNextFact_Click(object sender, EventArgs e)
         {
-            DisplayNextFact();
+            displayNextFact();
         }
 
         private void applyRandomFontAndSize()
         {
             string[] fontFamilies = { "Arial", "Comic Sans MS", "Verdana", "Tahoma", "Times New Roman" };
-            int fontSize = r_Random.Next(13, 29); // Random font size between 13 and 28
+            int fontSize = r_Random.Next(MinFontSize, MaxFontSize);
             string fontFamily = fontFamilies[r_Random.Next(fontFamilies.Length)];
 
             lblFact.Font = new Font(fontFamily, fontSize, FontStyle.Bold);
@@ -58,55 +60,57 @@ namespace BasicFacebookFeatures.UserInterface
             lblFact.TextAlign = ContentAlignment.TopCenter;
         }
 
-        private void setImageForFact(FactsGenerator.FactType i_FactType)
+        private void setImageForFact(eFactType i_FactType)
         {
-            switch (i_FactType)
+            eFactType factType = (eFactType)i_FactType;
+
+            switch (factType)
             {
-                case FactsGenerator.FactType.Friends:
-                    pictureBoxFacts.Image = Properties.Resources.FriendsImage; 
+                case eFactType.Friends:
+                    pictureBoxFacts.Image = Properties.Resources.FriendsImage;
                     break;
-                case FactsGenerator.FactType.Posts:
-                    pictureBoxFacts.Image = Properties.Resources.PostsImage; 
+                case eFactType.Posts:
+                    pictureBoxFacts.Image = Properties.Resources.PostsImage;
                     break;
-                case FactsGenerator.FactType.Age:
-                    pictureBoxFacts.Image = Properties.Resources.AgeImage; 
+                case eFactType.Age:
+                    pictureBoxFacts.Image = Properties.Resources.AgeImage;
                     break;
-                case FactsGenerator.FactType.RelationshipStatus:
-                    pictureBoxFacts.Image = Properties.Resources.RelationshipImage; 
+                case eFactType.RelationshipStatus:
+                    pictureBoxFacts.Image = Properties.Resources.RelationshipImage;
                     break;
-                case FactsGenerator.FactType.Hometown:
+                case eFactType.Hometown:
                     pictureBoxFacts.Image = Properties.Resources.HometownImage;
                     break;
-                case FactsGenerator.FactType.Gender:
-                    pictureBoxFacts.Image = Properties.Resources.GenderImage; 
+                case eFactType.Gender:
+                    pictureBoxFacts.Image = Properties.Resources.GenderImage;
                     break;
-                case FactsGenerator.FactType.Birthday:
-                    pictureBoxFacts.Image = Properties.Resources.BirthdayImage; 
+                case eFactType.Birthday:
+                    pictureBoxFacts.Image = Properties.Resources.BirthdayImage;
                     break;
-                case FactsGenerator.FactType.ProfilePicture:
+                case eFactType.ProfilePicture:
                     if (Uri.IsWellFormedUriString(r_LoggedInUser.PictureNormalURL, UriKind.Absolute))
                     {
                         try
                         {
-                            pictureBoxFacts.Load(r_LoggedInUser.PictureNormalURL); 
+                            pictureBoxFacts.Load(r_LoggedInUser.PictureNormalURL);
                         }
                         catch (Exception)
                         {
-                            pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage; 
+                            pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage;
                         }
                     }
                     else
                     {
-                        pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage; 
+                        pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage;
                     }
                     break;
-                case FactsGenerator.FactType.LikedPages:
-                    pictureBoxFacts.Image = Properties.Resources.LikedPagesImage; 
+                case eFactType.LikedPages:
+                    pictureBoxFacts.Image = Properties.Resources.LikedPagesImage;
                     break;
-                case FactsGenerator.FactType.Groups: 
-                    pictureBoxFacts.Image = Properties.Resources.GroupsImage; 
+                case eFactType.Groups:
+                    pictureBoxFacts.Image = Properties.Resources.GroupsImage;
                     break;
-                case FactsGenerator.FactType.ZodiacSign: 
+                case eFactType.ZodiacSign:
                     pictureBoxFacts.Image = Properties.Resources.ZodiacImage;
                     break;
                 default:
@@ -116,7 +120,7 @@ namespace BasicFacebookFeatures.UserInterface
 
             pictureBoxFacts.SizeMode = PictureBoxSizeMode.StretchImage;
         }
-
+    
         private void applyRandomColor()
         {
             Color[] colors =
@@ -134,6 +138,7 @@ namespace BasicFacebookFeatures.UserInterface
 
             lblFact.ForeColor = colors[r_Random.Next(colors.Length)];
         }
+
         private void centerLabel()
         {
             int verticalOffset = 90;

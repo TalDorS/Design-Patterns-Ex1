@@ -10,6 +10,8 @@ namespace BasicFacebookFeatures.UserInterface
 {
     public partial class FormFactsGeneratorFeature : Form
     {
+        private const int MinFontSize = 13;
+        private const int MaxFontSize = 29;
         private readonly User r_LoggedInUser;
         private FactsGenerator m_FactGenerator;
         private readonly Random r_Random;
@@ -20,10 +22,10 @@ namespace BasicFacebookFeatures.UserInterface
             r_LoggedInUser = i_LoggedInUser;
             m_FactGenerator = new FactsGenerator(r_LoggedInUser);
             r_Random = new Random();
-            DisplayNextFact();
+            displayNextFact();
         }
 
-        private void DisplayNextFact()
+        private void displayNextFact()
         {
             string fact = m_FactGenerator.GenerateNextFact();
 
@@ -42,13 +44,13 @@ namespace BasicFacebookFeatures.UserInterface
 
         private void buttonNextFact_Click(object sender, EventArgs e)
         {
-            DisplayNextFact();
+            displayNextFact();
         }
 
         private void applyRandomFontAndSize()
         {
             string[] fontFamilies = { "Arial", "Comic Sans MS", "Verdana", "Tahoma", "Times New Roman" };
-            int fontSize = r_Random.Next(13, 29); // Random font size between 13 and 28
+            int fontSize = r_Random.Next(MinFontSize, MaxFontSize);
             string fontFamily = fontFamilies[r_Random.Next(fontFamilies.Length)];
 
             lblFact.Font = new Font(fontFamily, fontSize, FontStyle.Bold);
@@ -58,9 +60,8 @@ namespace BasicFacebookFeatures.UserInterface
             lblFact.TextAlign = ContentAlignment.TopCenter;
         }
 
-        private void setImageForFact(BasicFacebookFeatures.Enums.eFactType i_FactType)
+        private void setImageForFact(eFactType i_FactType)
         {
-            // Convert eFactType to FactType
             eFactType factType = (eFactType)i_FactType;
 
             switch (factType)
@@ -120,7 +121,7 @@ namespace BasicFacebookFeatures.UserInterface
             pictureBoxFacts.SizeMode = PictureBoxSizeMode.StretchImage;
         }
     
-    private void applyRandomColor()
+        private void applyRandomColor()
         {
             Color[] colors =
             {
@@ -137,6 +138,7 @@ namespace BasicFacebookFeatures.UserInterface
 
             lblFact.ForeColor = colors[r_Random.Next(colors.Length)];
         }
+
         private void centerLabel()
         {
             int verticalOffset = 90;

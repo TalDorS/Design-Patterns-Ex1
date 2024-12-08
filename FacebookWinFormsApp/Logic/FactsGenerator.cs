@@ -27,7 +27,7 @@ namespace BasicFacebookFeatures.Logic
                 eFactType.ProfilePicture,
                 eFactType.LikedPages,
                 eFactType.Groups,
-                eFactType.ZodiacSign 
+                eFactType.ZodiacSign
             };
 
             m_FactIndex = 0;
@@ -41,12 +41,11 @@ namespace BasicFacebookFeatures.Logic
             }
         }
 
-        private eZodiacSign getZodiacSign(DateTime i_Birthday)
+        private eZodiacSign getZodiacSign(DateTime i_Birthdate)
         {
-            int month = i_Birthday.Month;
-            int day = i_Birthday.Day;
-
-            eZodiacSign zodiacSign = eZodiacSign.Unknown; 
+            int month = i_Birthdate.Month;
+            int day = i_Birthdate.Day;
+            eZodiacSign zodiacSign = eZodiacSign.Unknown;
 
             switch (month)
             {
@@ -91,22 +90,6 @@ namespace BasicFacebookFeatures.Logic
             return zodiacSign;
         }
 
-        public string ExecuteGenerator()
-        {
-            string randomFact = string.Empty;
-
-            if (r_LoggedInUser != null)
-            {
-                randomFact = GenerateNextFact();
-            }
-            else
-            {
-                MessageBox.Show("Please log in first!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return randomFact;
-        }
-
         public string GenerateNextFact()
         {
             if (r_LoggedInUser == null)
@@ -120,62 +103,141 @@ namespace BasicFacebookFeatures.Logic
             }
 
             eFactType currentFact = m_Facts[m_FactIndex];
-            string fact = string.Empty;
-            switch (currentFact)
-            {
-                case eFactType.Friends:
-                    fact = r_LoggedInUser.Friends.Count > 0 ? $"You have {r_LoggedInUser.Friends.Count} friends!" : "You have no friends on Facebook.";
-                    break;
-                case eFactType.Posts:
-                    fact = r_LoggedInUser.Posts.Count > 0 ? $"You've made {r_LoggedInUser.Posts.Count} posts so far!" : "You haven't made any posts yet.";
-                    break;
-                case eFactType.Age:
-                    if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime o_Birthday))
-                    {
-                        int age = DateTime.Now.Year - o_Birthday.Year;
-
-                        if (o_Birthday.Date > DateTime.Now.AddYears(-age)) age--;
-                        fact = $"You are {age} years old!";
-                    }
-                    break;
-                case eFactType.RelationshipStatus:
-                    fact = $"Your relationship status is: {r_LoggedInUser.RelationshipStatus}.";
-                    break;
-                case eFactType.Hometown:
-                    fact = $"You live in {r_LoggedInUser.Hometown?.Name ?? "an unknown place"}!";
-                    break;
-                case eFactType.Gender:
-                    fact = $"Your gender is: {r_LoggedInUser.Gender}.";
-                    break;
-                case eFactType.Birthday:
-                    fact = $"You were born on {r_LoggedInUser.Birthday}!";
-                    break;
-                case eFactType.ProfilePicture:
-                    fact = $"{r_LoggedInUser.Name}'s profile picture is:";
-                    break;
-                case eFactType.LikedPages: 
-                    fact= $"You like {r_LoggedInUser.LikedPages.Count} pages.";
-                    break;
-                case eFactType.Groups: 
-                    fact = $"You are a member of {r_LoggedInUser.Groups.Count} groups.";
-                    break;
-                case eFactType.ZodiacSign: 
-                    if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime o_ZodiacBirthday))
-                    {
-                        eZodiacSign zodiacSign = getZodiacSign(o_ZodiacBirthday);
-
-                        fact = $"Your zodiac sign is {zodiacSign}!";
-                    }
-                    else
-                    {
-                        fact = "Unable to determine your zodiac sign.";
-                    }
-                    break;
-                default:
-                    return "Fact unavailable.";
-            }
+            string fact = getFact(currentFact);
 
             m_FactIndex++;
+
+            return fact;
+        }
+
+        private string getFact(eFactType io_CurrentFact)
+        {
+            string fact = string.Empty;
+
+            switch (io_CurrentFact)
+            {
+                case eFactType.Friends:
+                    fact = generateFriendsFact();
+                    break;
+                case eFactType.Posts:
+                    fact = generatePostsFact();
+                    break;
+                case eFactType.Age:
+                    fact = generateAgeFact();
+                    break;
+                case eFactType.RelationshipStatus:
+                    fact = generateRelationshipStatusFact();
+                    break;
+                case eFactType.Hometown:
+                    fact = generateHometownFact();
+                    break;
+                case eFactType.Gender:
+                    fact = generateGenderFact();
+                    break;
+                case eFactType.Birthday:
+                    fact = generateBirthdayFact();
+                    break;
+                case eFactType.ProfilePicture:
+                    fact = generateProfilePictureFact();
+                    break;
+                case eFactType.LikedPages:
+                    fact = generateLikedPagesFact();
+                    break;
+                case eFactType.Groups:
+                    fact = generateGroupsFact();
+                    break;
+                case eFactType.ZodiacSign:
+                    fact = generateZodiacSignFact();
+                    break;
+                default:
+                    fact = "Fact unavailable.";
+                    break;
+            }
+
+            return fact;
+        }
+
+        private string generateFriendsFact()
+        {
+            return r_LoggedInUser.Friends.Count > 0
+                ? $"You have {r_LoggedInUser.Friends.Count} friends!"
+                : "You have no friends on Facebook.";
+        }
+
+        private string generatePostsFact()
+        {
+            return r_LoggedInUser.Posts.Count > 0
+                ? $"You've made {r_LoggedInUser.Posts.Count} posts so far!"
+                : "You haven't made any posts yet.";
+        }
+
+        private string generateAgeFact()
+        {
+            string fact;
+
+            if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime io_Birthdate))
+            {
+                int age = DateTime.Now.Year - io_Birthdate.Year;
+
+                if (io_Birthdate.Date > DateTime.Now.AddYears(-age)) age--;
+                fact = $"You are {age} years old!";
+            }
+            else
+            {
+                fact = "Unable to determine your age.";
+            }
+
+            return fact;
+        }
+
+        private string generateRelationshipStatusFact()
+        {
+            return $"Your relationship status is: {r_LoggedInUser.RelationshipStatus}.";
+        }
+
+        private string generateHometownFact()
+        {
+            return $"You live in {r_LoggedInUser.Hometown?.Name ?? "an unknown place"}!";
+        }
+
+        private string generateGenderFact()
+        {
+            return $"Your gender is: {r_LoggedInUser.Gender}.";
+        }
+
+        private string generateBirthdayFact()
+        {
+            return $"You were born on {r_LoggedInUser.Birthday}!";
+        }
+
+        private string generateProfilePictureFact()
+        {
+            return $"{r_LoggedInUser.Name}'s profile picture is:";
+        }
+
+        private string generateLikedPagesFact()
+        {
+            return $"You like {r_LoggedInUser.LikedPages.Count} pages.";
+        }
+
+        private string generateGroupsFact()
+        {
+            return $"You are a member of {r_LoggedInUser.Groups.Count} groups.";
+        }
+
+        private string generateZodiacSignFact()
+        {
+            string fact;
+
+            if (DateTime.TryParse(r_LoggedInUser.Birthday, out DateTime io_Birthdate))
+            {
+                eZodiacSign zodiacSign = getZodiacSign(io_Birthdate);
+                fact = $"Your zodiac sign is {zodiacSign}!";
+            }
+            else
+            {
+                fact = "Unable to determine your zodiac sign.";
+            }
 
             return fact;
         }

@@ -19,6 +19,7 @@ namespace BasicFacebookFeatures.UserInterface
             InitializeComponent();
             LoginManager = new LoginManager();
             RememberUser = false;
+            checkBoxRememberMe.Checked = false;
             updateLoginButtonState();
         }
 

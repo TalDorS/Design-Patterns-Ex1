@@ -4,12 +4,12 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BasicFacebookFeatures.Enums;
 
 namespace BasicFacebookFeatures.UserInterface
 {
     public partial class FormFactsGeneratorFeature : Form
     {
-
         private readonly User r_LoggedInUser;
         private FactsGenerator m_FactGenerator;
         private readonly Random r_Random;
@@ -25,9 +25,9 @@ namespace BasicFacebookFeatures.UserInterface
 
         private void DisplayNextFact()
         {
-            buttonNextFact.Enabled = false;
             string fact = m_FactGenerator.GenerateNextFact();
 
+            buttonNextFact.Enabled = false;
             lblFact.Text = fact;
             setImageForFact(m_FactGenerator.CurrentFact);
             applyRandomFontAndSize();
@@ -58,55 +58,58 @@ namespace BasicFacebookFeatures.UserInterface
             lblFact.TextAlign = ContentAlignment.TopCenter;
         }
 
-        private void setImageForFact(FactsGenerator.FactType i_FactType)
+        private void setImageForFact(BasicFacebookFeatures.Enums.eFactType i_FactType)
         {
-            switch (i_FactType)
+            // Convert eFactType to FactType
+            eFactType factType = (eFactType)i_FactType;
+
+            switch (factType)
             {
-                case FactsGenerator.FactType.Friends:
-                    pictureBoxFacts.Image = Properties.Resources.FriendsImage; 
+                case eFactType.Friends:
+                    pictureBoxFacts.Image = Properties.Resources.FriendsImage;
                     break;
-                case FactsGenerator.FactType.Posts:
-                    pictureBoxFacts.Image = Properties.Resources.PostsImage; 
+                case eFactType.Posts:
+                    pictureBoxFacts.Image = Properties.Resources.PostsImage;
                     break;
-                case FactsGenerator.FactType.Age:
-                    pictureBoxFacts.Image = Properties.Resources.AgeImage; 
+                case eFactType.Age:
+                    pictureBoxFacts.Image = Properties.Resources.AgeImage;
                     break;
-                case FactsGenerator.FactType.RelationshipStatus:
-                    pictureBoxFacts.Image = Properties.Resources.RelationshipImage; 
+                case eFactType.RelationshipStatus:
+                    pictureBoxFacts.Image = Properties.Resources.RelationshipImage;
                     break;
-                case FactsGenerator.FactType.Hometown:
+                case eFactType.Hometown:
                     pictureBoxFacts.Image = Properties.Resources.HometownImage;
                     break;
-                case FactsGenerator.FactType.Gender:
-                    pictureBoxFacts.Image = Properties.Resources.GenderImage; 
+                case eFactType.Gender:
+                    pictureBoxFacts.Image = Properties.Resources.GenderImage;
                     break;
-                case FactsGenerator.FactType.Birthday:
-                    pictureBoxFacts.Image = Properties.Resources.BirthdayImage; 
+                case eFactType.Birthday:
+                    pictureBoxFacts.Image = Properties.Resources.BirthdayImage;
                     break;
-                case FactsGenerator.FactType.ProfilePicture:
+                case eFactType.ProfilePicture:
                     if (Uri.IsWellFormedUriString(r_LoggedInUser.PictureNormalURL, UriKind.Absolute))
                     {
                         try
                         {
-                            pictureBoxFacts.Load(r_LoggedInUser.PictureNormalURL); 
+                            pictureBoxFacts.Load(r_LoggedInUser.PictureNormalURL);
                         }
                         catch (Exception)
                         {
-                            pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage; 
+                            pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage;
                         }
                     }
                     else
                     {
-                        pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage; 
+                        pictureBoxFacts.Image = Properties.Resources.DefaultProfileImage;
                     }
                     break;
-                case FactsGenerator.FactType.LikedPages:
-                    pictureBoxFacts.Image = Properties.Resources.LikedPagesImage; 
+                case eFactType.LikedPages:
+                    pictureBoxFacts.Image = Properties.Resources.LikedPagesImage;
                     break;
-                case FactsGenerator.FactType.Groups: 
-                    pictureBoxFacts.Image = Properties.Resources.GroupsImage; 
+                case eFactType.Groups:
+                    pictureBoxFacts.Image = Properties.Resources.GroupsImage;
                     break;
-                case FactsGenerator.FactType.ZodiacSign: 
+                case eFactType.ZodiacSign:
                     pictureBoxFacts.Image = Properties.Resources.ZodiacImage;
                     break;
                 default:
@@ -116,8 +119,8 @@ namespace BasicFacebookFeatures.UserInterface
 
             pictureBoxFacts.SizeMode = PictureBoxSizeMode.StretchImage;
         }
-
-        private void applyRandomColor()
+    
+    private void applyRandomColor()
         {
             Color[] colors =
             {
